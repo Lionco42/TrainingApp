@@ -13,27 +13,27 @@ public class MuscleCount {
     int Calves=0;
 
     public void addSets(String[] muscles, int j){
-        for(int i=0; i< muscles.length; i++){
-            if(muscles[i].equals("Pecs"))
-                Pecs+=j;
-            if(muscles[i].equals("Back"))
-                Back+=j;
-            if(muscles[i].equals("AntDelts"))
-                AntDelts+=j;
-            if(muscles[i].equals("MedDelts"))
-                MedDelts+=j;
-            if(muscles[i].equals("RearDelts"))
-                RearDelts+=j;
-            if(muscles[i].equals("Biceps"))
-                Biceps+=j;
-            if(muscles[i].equals("Triceps"))
-                Triceps+=j;
-            if(muscles[i].equals("Quads"))
-                Quads+=j;
-            if(muscles[i].equals("Hamstrings"))
-                Hamstrings+=j;
-            if(muscles[i].equals("Calves"))
-                Calves+=j;
+        for (String muscle : muscles) {
+            if (muscle.equals("Pecs"))
+                Pecs += j;
+            if (muscle.equals("Back"))
+                Back += j;
+            if (muscle.equals("AntDelts"))
+                AntDelts += j;
+            if (muscle.equals("MedDelts"))
+                MedDelts += j;
+            if (muscle.equals("RearDelts"))
+                RearDelts += j;
+            if (muscle.equals("Biceps"))
+                Biceps += j;
+            if (muscle.equals("Triceps"))
+                Triceps += j;
+            if (muscle.equals("Quads"))
+                Quads += j;
+            if (muscle.equals("Hamstrings"))
+                Hamstrings += j;
+            if (muscle.equals("Calves"))
+                Calves += j;
         }
 
 }}
