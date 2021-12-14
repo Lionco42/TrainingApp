@@ -1,39 +1,39 @@
 package com.example.trainingapp;
 
 public class MuscleCount {
-    int Pecs=0;
-    int Back=0;
-    int AntDelts=0;
-    int MedDelts=0;
-    int RearDelts=0;
-    int Biceps=0;
-    int Triceps=0;
-    int Quads=0;
-    int Hamstrings=0;
-    int Calves=0;
+    int pecs=0;
+    int back=0;
+    int antDelts=0;
+    int midDelts=0;
+    int rearDelts=0;
+    int biceps=0;
+    int triceps=0;
+    int quads=0;
+    int hamstrings=0;
+    int calves=0;
 
     public void addSets(String[] muscles, int j){
         for (String muscle : muscles) {
             if (muscle.equals("Pecs"))
-                Pecs += j;
+                pecs += j;
             if (muscle.equals("Back"))
-                Back += j;
+                back += j;
             if (muscle.equals("AntDelts"))
-                AntDelts += j;
+                antDelts += j;
             if (muscle.equals("MedDelts"))
-                MedDelts += j;
+                midDelts += j;
             if (muscle.equals("RearDelts"))
-                RearDelts += j;
+                rearDelts += j;
             if (muscle.equals("Biceps"))
-                Biceps += j;
+                biceps += j;
             if (muscle.equals("Triceps"))
-                Triceps += j;
+                triceps += j;
             if (muscle.equals("Quads"))
-                Quads += j;
+                quads += j;
             if (muscle.equals("Hamstrings"))
-                Hamstrings += j;
+                hamstrings += j;
             if (muscle.equals("Calves"))
-                Calves += j;
+                calves += j;
         }
 
 }}

@@ -1,15 +1,13 @@
 package com.example.trainingapp;
 
 public class Exercise {
-    String Name;
-    String Type;
-    String[] Muscles;
+    ExerciseType exerciseType;
+    String reps;
+    int sets;
 
-    public Exercise(String Type, String Name){
-        this.Name=Name;
-        this.Type=Type;
-        if(Type.equals("Vertical Push")){
-            this.Muscles=new String[]{"AntDelts","MedDelts","Triceps"};
-        }
+    public Exercise(int sets, ExerciseType exerciseName, String reps){
+        this.exerciseType=exerciseName;
+        this.reps=reps;
+        this.sets=sets;
     }
 }
