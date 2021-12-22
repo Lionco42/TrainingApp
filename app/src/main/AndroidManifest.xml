@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TrainingApp">
         <activity
+            android:name=".ExerciseInfo"
+            android:exported="false" />
+        <activity
+            android:name=".ProgramStats"
+            android:exported="false" />
+        <activity
+            android:name=".ExerciseList"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/itemStats"
+        android:title="Show program stats" />
+    <item
+        android:id="@+id/itemExList"
+        android:title="Show exercise list" />
+    <item
+        android:id="@+id/itemAddDay"
+        android:title="Add a day" />
+    <item
+        android:id="@+id/itemShare"
+        android:title="Share your program" />
+</menu>
