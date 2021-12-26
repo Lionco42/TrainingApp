@@ -12,7 +12,7 @@ import android.widget.EditText;
 public class ExerciseList extends AppCompatActivity implements View.OnClickListener {
     Button btnReturn, btnInfo, btnCreate,btnConfirm;
     Dialog d;
-    EditText etExName, etExType;
+    EditText etExName, etMovement;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,12 +41,13 @@ public class ExerciseList extends AppCompatActivity implements View.OnClickListe
             d.setTitle("Create Exercise");
             d.setCancelable(true);
             etExName=(EditText)d.findViewById(R.id.etExName);
-            etExType=(EditText)d.findViewById(R.id.etExType);
+            etMovement=(EditText)d.findViewById(R.id.etMovement);
             btnConfirm=(Button)d.findViewById(R.id.btnConfirm);
             btnConfirm.setOnClickListener(this);
             d.show();
         }
         if(view==btnConfirm){
+            ExerciseType newEx = new ExerciseType(etMovement.getText().toString(),etExName.getText().toString());
             d.dismiss();
         }
     }
