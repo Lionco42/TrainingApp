@@ -4,22 +4,27 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.json.JSONStringer;
+
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     ArrayList<Day> week1 = new ArrayList<>();
     ArrayAdapter<Day> weekAdapter;
     ListView week;
+    SharedPreferences sp;
     int daycount=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         week.setAdapter(weekAdapter);
+        week.setOnItemClickListener(this);
     }
 
     @Override
@@ -62,7 +68,15 @@ public class MainActivity extends AppCompatActivity {
             daycount++;
             week1.add(day1);
             weekAdapter.notifyDataSetChanged();
+
         }
         return true;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        int id=view.getId();
+            Intent intent = new Intent(this,DayActivity.class);
+            startActivity(intent);
     }
 }

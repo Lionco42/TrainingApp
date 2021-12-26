@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_day.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_exercise_list.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/exercisecreate_dialog.xml" value="2.0" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/TrainingApp/app/src/main/res/menu/menu_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/lionc/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_exercise_info.xml" value="0.3415384615384615" />
         <entry key="..\:/Users/lionc/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_exercise_list.xml" value="0.3415384615384615" />
         <entry key="..\:/Users/lionc/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_main.xml" value="0.33" />
