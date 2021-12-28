@@ -9,13 +9,13 @@ public class ExerciseType {
         this.name=Name;
         this.movement=movement;
         if(movement.equals("Vertical Push")){
-            this.muscles=new String[]{"AntDelts","MedDelts","Triceps"};
+            this.muscles=new String[]{"AntDelts","MidDelts","Triceps"};
         }
         if(movement.equals("Vertical Pull")){
             this.muscles=new String[]{"RearDelts","Back","Biceps"};
         }
         if(movement.equals("Incline Push")){
-            this.muscles=new String[]{"AntDelts","MedDelts","Triceps","Pecs"};
+            this.muscles=new String[]{"AntDelts","MidDelts","Triceps","Pecs"};
         }
         if(movement.equals("Horizontal Push")){
             this.muscles=new String[]{"AntDelts","Pecs","Triceps"};
@@ -30,7 +30,7 @@ public class ExerciseType {
             this.muscles=new String[]{"Pecs","AntDelts"};
         }
         if(movement.equals("Horizontal Pull")){
-            this.muscles=new String[]{"Biceps","MedDelts","Back","RearDelts"};
+            this.muscles=new String[]{"Biceps","MidDelts","Back","RearDelts"};
         }
         if(movement.equals("Biceps Iso")){
             this.muscles=new String[]{"Biceps"};
@@ -48,7 +48,7 @@ public class ExerciseType {
             this.muscles=new String[]{"AntDelts"};
         }
         if(movement.equals("Middle Delts Iso")){
-            this.muscles=new String[]{"MedDelts"};
+            this.muscles=new String[]{"MidDelts"};
         }
         if(movement.equals("Rear Delts Iso")){
             this.muscles=new String[]{"RearDelts"};
@@ -56,5 +56,8 @@ public class ExerciseType {
         if(movement.equals("Calves Iso")){
             this.muscles=new String[]{"Calves"};
         }
+    }
+    public String getName(){
+        return this.name;
     }
 }

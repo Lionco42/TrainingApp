@@ -13,13 +13,13 @@
             android:name=".DayActivity"
             android:exported="false" />
         <activity
-            android:name=".ExerciseInfo"
+            android:name=".ExerciseInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".ProgramStats"
+            android:name=".ProgramStatsActivity"
             android:exported="false" />
         <activity
-            android:name=".ExerciseList"
+            android:name=".ExerciseListActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

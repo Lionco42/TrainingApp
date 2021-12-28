@@ -1,6 +1,7 @@
 package com.example.trainingapp;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,11 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import org.json.JSONStringer;
 
 import java.util.ArrayList;
 
@@ -26,11 +24,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ListView week;
     SharedPreferences sp;
     int daycount=0;
+    TrainingAppController contr = new TrainingAppController();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        week=findViewById(R.id.week1);
+        week=findViewById(R.id.week);
         weekAdapter = new ArrayAdapter<Day>(this, android.R.layout.activity_list_item, android.R.id.text1, week1) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -56,11 +55,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onOptionsItemSelected(item);
         int id=item.getItemId();
         if(id==R.id.itemExList){
-            Intent intent = new Intent(this,ExerciseList.class);
+            Intent intent = new Intent(this, ExerciseListActivity.class);
             startActivity(intent);
         }
         if(id==R.id.itemStats){
-            Intent intent = new Intent(this,ProgramStats.class);
+            Intent intent = new Intent(this, ProgramStatsActivity.class);
             startActivity(intent);
         }
         if(id==R.id.itemAddDay){
@@ -68,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             daycount++;
             week1.add(day1);
             weekAdapter.notifyDataSetChanged();
-
         }
         return true;
     }
@@ -76,7 +74,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         int id=view.getId();
-            Intent intent = new Intent(this,DayActivity.class);
-            startActivity(intent);
+        Intent intent = new Intent(this,DayActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

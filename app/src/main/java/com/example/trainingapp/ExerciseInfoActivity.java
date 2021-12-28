@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class ExerciseInfo extends AppCompatActivity implements View.OnClickListener {
+public class ExerciseInfoActivity extends AppCompatActivity implements View.OnClickListener {
     Button btnReturnFromInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +20,7 @@ public class ExerciseInfo extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         if(view==btnReturnFromInfo){
-            Intent intent = new Intent(this,ExerciseList.class);
-            startActivity(intent);
+            finish();
         }
     }
 }

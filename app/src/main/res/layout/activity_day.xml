@@ -18,4 +18,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="return" />
+
+    <ListView
+        android:id="@+id/day"
+        android:layout_width="match_parent"
+        android:layout_height="369dp">
+
+    </ListView>
+
+    <Button
+        android:id="@+id/btnAddToDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button" />
 </LinearLayout>

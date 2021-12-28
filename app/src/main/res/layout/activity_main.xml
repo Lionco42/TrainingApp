@@ -14,7 +14,7 @@
         android:text="Hello World!" />
 
     <ListView
-        android:id="@+id/week1"
+        android:id="@+id/week"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

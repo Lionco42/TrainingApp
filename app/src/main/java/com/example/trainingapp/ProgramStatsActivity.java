@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class ProgramStats extends AppCompatActivity implements View.OnClickListener {
+public class ProgramStatsActivity extends AppCompatActivity implements View.OnClickListener {
     Button btnReturnFromStats;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +20,7 @@ public class ProgramStats extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         if(view==btnReturnFromStats){
-            Intent intent = new Intent(this,MainActivity.class);
-            startActivity(intent);
+            finish();
         }
     }
 }
