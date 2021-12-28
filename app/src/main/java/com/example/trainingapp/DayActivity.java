@@ -40,7 +40,7 @@ public class DayActivity extends AppCompatActivity implements View.OnClickListen
                 View view = super.getView(position, convertView, parent);
                 Exercise ex = (Exercise) day.getAdapter().getItem(position);
                 TextView text = view.findViewById(android.R.id.text1);
-                text.setText(day.toString());
+                text.setText(ex.getName());
                 return view;
             }
         };
@@ -66,7 +66,10 @@ public class DayActivity extends AppCompatActivity implements View.OnClickListen
             d.show();
         }
         if(view==btnConfirmAdd){
-            //Exercise ex = new Exercise(Integer.valueOf(etAddSets.getText().toString()),lst.getEx,etAddReps.getText().toString());
+            Exercise ex = new Exercise(Integer.valueOf(etAddSets.getText().toString()),ExerciseList.sharedInstance().getEx("Pullup"),etAddReps.getText().toString());
+            //ExerciseList.sharedInstance().getEx(etAddName.getText().toString())
+            dayx.add(ex);
+            dayAdapter.notifyDataSetChanged();
             d.dismiss();
         }
     }

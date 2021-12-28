@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ListView week;
     SharedPreferences sp;
     int daycount=0;
-    TrainingAppController contr = new TrainingAppController();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +41,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         };
         week.setAdapter(weekAdapter);
         week.setOnItemClickListener(this);
+        ExerciseList exs = ExerciseList.sharedInstance();
+        exs.createEx("Biceps Iso","BicepCurl");
+        exs.createEx("Horizontal Push","BenchPress");
+        exs.createEx("Horizontal Pull","CableRow");
+        exs.createEx("Vertical Pull","Pullup");
     }
 
     @Override

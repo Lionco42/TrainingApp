@@ -10,4 +10,14 @@ public class Exercise {
         this.reps=reps;
         this.sets=sets;
     }
+
+    public String getName(){
+        return ""+this.exerciseType;
+    }
+    public int getSets(){
+        return this.sets;
+
+    }public String getReps(){
+        return this.reps;
+    }
 }
