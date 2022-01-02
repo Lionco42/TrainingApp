@@ -43,10 +43,10 @@ public class DayActivity extends AppCompatActivity implements View.OnClickListen
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
-                Exercise ex = (Exercise) day.getAdapter().getItem(position);
+                Exercise ex1 = (Exercise) day.getAdapter().getItem(position);
                 TextView text = view.findViewById(android.R.id.text1);
                 if(!dayx.isEmpty())
-                    text.setText(ex.getName().toString());
+                    text.setText(ex1.getName().toString());
                 return view;
             }
         };
