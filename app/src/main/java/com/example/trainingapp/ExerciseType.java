@@ -57,7 +57,7 @@ public class ExerciseType {
             this.muscles=new String[]{"Calves"};
         }
     }
-    public String getName(){
+    public String getname(){
         return this.name;
     }
 }

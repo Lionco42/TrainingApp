@@ -11,13 +11,16 @@ public class ExerciseList {
         return exs;
     }
     public ExerciseList(){};
+    public ArrayList<ExerciseType> getLst(){
+        return lst;
+    }
     public void createEx(String type, String name) {
         ExerciseType ex = new ExerciseType(type, name);
         lst.add(ex);
     }
     public ExerciseType getEx(String name){
         for(int i=0; i<=lst.toArray().length; i++){
-            if(lst.get(i).getName().equals(name)){
+            if(lst.get(i).getname().equals(name)){
                 return lst.get(i);
             }
         }

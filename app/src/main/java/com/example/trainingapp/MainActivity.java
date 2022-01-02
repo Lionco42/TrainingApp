@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        int id=view.getId();
         Intent intent = new Intent(this,DayActivity.class);
         startActivity(intent);
     }
