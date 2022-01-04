@@ -1,8 +1,9 @@
 package com.example.trainingapp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ExerciseList {
+public class ExerciseList implements Serializable {
     ArrayList<ExerciseType> lst = new ArrayList<>();
     public static ExerciseList exs;
     public static ExerciseList sharedInstance(){
@@ -20,7 +21,7 @@ public class ExerciseList {
     }
     public ExerciseType getEx(String name){
         for(int i=0; i<=lst.toArray().length; i++){
-            if(lst.get(i).getname().equals(name)){
+            if(lst.get(i).toString().equals(name)){
                 return lst.get(i);
             }
         }

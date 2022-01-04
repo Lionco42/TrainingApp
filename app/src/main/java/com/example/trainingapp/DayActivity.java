@@ -3,6 +3,7 @@ package com.example.trainingapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 public class DayActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
@@ -21,13 +24,14 @@ public class DayActivity extends AppCompatActivity implements View.OnClickListen
     EditText etAddName, etAddReps, etAddSets;
     TextView tv;
     ArrayList<Exercise> dayx = new ArrayList<>();
-    ArrayList<ExerciseType> exaddlist = ExerciseList.sharedInstance().getLst();
+    ExerciseList exs;
     ArrayAdapter<Exercise> dayAdapter;
     ListView day;
     Dialog d;
     Spinner spinner;
     ExerciseType selectedEx;
     ArrayAdapter<ExerciseType> spinnerAdapter;
+    SharedPreferences sp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +43,11 @@ public class DayActivity extends AppCompatActivity implements View.OnClickListen
         tv=findViewById(R.id.dayTitleTv);
         day=findViewById(R.id.day);
 
+        sp=getSharedPreferences("details1",0);
+        Gson gson = new Gson();
+        String json = sp.getString("exerciseTypeList","");
+        exs=gson.fromJson(json,ExerciseList.class);
+
         dayAdapter = new ArrayAdapter<Exercise>(this, android.R.layout.activity_list_item, android.R.id.text1, dayx) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -46,13 +55,14 @@ public class DayActivity extends AppCompatActivity implements View.OnClickListen
                 Exercise ex1 = (Exercise) day.getAdapter().getItem(position);
                 TextView text = view.findViewById(android.R.id.text1);
                 if(!dayx.isEmpty())
-                    text.setText(ex1.getName().toString());
+                    text.setText(ex1.getName()+" Reps: "+ex1.getReps()+" Sets: "+ex1.getSets());
                 return view;
             }
         };
         day.setAdapter(dayAdapter);
         day.setOnItemClickListener(this);
-        spinnerAdapter = new ArrayAdapter<ExerciseType>(this, android.R.layout.simple_spinner_dropdown_item, exaddlist);
+
+        spinnerAdapter = new ArrayAdapter<ExerciseType>(this, android.R.layout.simple_spinner_dropdown_item, exs.getLst());
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     }
 
@@ -88,12 +98,12 @@ public class DayActivity extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        selectedEx = exs.getLst().get(i);
     }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        if(view==spinner)
-            selectedEx = exaddlist.get(i);
+        selectedEx = exs.getLst().get(i);
     }
 
     @Override

@@ -1,6 +1,9 @@
 package com.example.trainingapp;
 
-public class ExerciseType {
+import java.io.Serializable;
+import java.util.Arrays;
+
+public class ExerciseType implements Serializable {
     String name;
     String movement;
     String[] muscles;
@@ -57,7 +60,9 @@ public class ExerciseType {
             this.muscles=new String[]{"Calves"};
         }
     }
-    public String getname(){
+
+    @Override
+    public String toString() {
         return this.name;
     }
 }

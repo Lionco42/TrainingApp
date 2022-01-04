@@ -19,14 +19,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="btnReturn" />
+        android:text="Return to Main Menu" />
 
     <Button
         android:id="@+id/btnInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Exercise Info" />
+        android:text="Movement Info" />
 
     <Button
         android:id="@+id/btnCreate"

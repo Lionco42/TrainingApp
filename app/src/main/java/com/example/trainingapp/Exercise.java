@@ -12,7 +12,7 @@ public class Exercise {
     }
 
     public String getName(){
-        return ""+this.exerciseType.getname();
+        return ""+this.exerciseType.toString();
     }
     public int getSets(){
         return this.sets;

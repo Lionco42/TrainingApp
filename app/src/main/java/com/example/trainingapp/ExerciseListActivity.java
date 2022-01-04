@@ -4,15 +4,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+
 public class ExerciseListActivity extends AppCompatActivity implements View.OnClickListener {
     Button btnReturn, btnInfo, btnCreate,btnConfirm;
     Dialog d;
     EditText etExName, etMovement;
+    ExerciseList lst;
+    SharedPreferences sp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +30,11 @@ public class ExerciseListActivity extends AppCompatActivity implements View.OnCl
         btnInfo.setOnClickListener(this);
         btnCreate=findViewById(R.id.btnCreate);
         btnCreate.setOnClickListener(this);
+
+        sp=getSharedPreferences("details1",0);
+        Gson gson = new Gson();
+        String json = sp.getString("exerciseTypeList","");
+        lst=gson.fromJson(json,ExerciseList.class);
     }
 
     @Override
@@ -46,6 +58,14 @@ public class ExerciseListActivity extends AppCompatActivity implements View.OnCl
             d.show();
         }
         if(view==btnConfirm){
+            ExerciseType ex = new ExerciseType(etMovement.getText().toString(), etExName.getText().toString());
+            lst.getLst().add(ex);
+            sp=getSharedPreferences("details1",0);
+            SharedPreferences.Editor editor=sp.edit();
+            Gson gson=new Gson();
+            String json = gson.toJson(lst);
+            editor.putString("exerciseTypeList", json);
+            editor.commit();
             d.dismiss();
         }
     }
