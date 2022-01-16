@@ -21,17 +21,26 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
-    ArrayList<Day> week1 = new ArrayList<>();
+    Week week1;
+    ArrayList<Day> dayArrayList;
     ArrayAdapter<Day> weekAdapter;
     ListView week;
+    ExerciseList exs;
     SharedPreferences sp;
-    int daycount=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sp=getSharedPreferences("details1",0);
+        Gson gson = new Gson();
+        String json = sp.getString("Week","");
+        week1=gson.fromJson(json,Week.class);
+        if(week1==null)
+            week1=Week.sharedInstance();
+        dayArrayList= week1.getDayList();
+
         week=findViewById(R.id.week);
-        weekAdapter = new ArrayAdapter<Day>(this, android.R.layout.activity_list_item, android.R.id.text1, week1) {
+        weekAdapter = new ArrayAdapter<Day>(this, android.R.layout.activity_list_item, android.R.id.text1, dayArrayList) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
@@ -43,17 +52,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         };
         week.setAdapter(weekAdapter);
         week.setOnItemClickListener(this);
-        ExerciseList exs = ExerciseList.sharedInstance();
+
+        json = sp.getString("exerciseTypeList","");
+        exs=gson.fromJson(json,ExerciseList.class);
+        if(exs==null)
+            exs=ExerciseList.sharedInstance();
+        SharedPreferences.Editor editor=sp.edit();
+        json = gson.toJson(exs);
         exs.createEx("Biceps Iso","BicepCurl");
         exs.createEx("Horizontal Push","BenchPress");
         exs.createEx("Horizontal Pull","CableRow");
         exs.createEx("Vertical Pull","Pullup");
-        sp=getSharedPreferences("details1",0);
-        SharedPreferences.Editor editor=sp.edit();
-        Gson gson=new Gson();
-        String json = gson.toJson(exs);
         editor.putString("exerciseTypeList", json);
         editor.commit();
+
+
     }
 
     @Override
@@ -75,9 +88,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             startActivity(intent);
         }
         if(id==R.id.itemAddDay){
-            Day day1 = new Day(daycount);
-            daycount++;
-            week1.add(day1);
+            Day day1 = new Day(week1.getCount());
+            week1.addDay(day1);
+
+            SharedPreferences.Editor editor=sp.edit();
+            Gson gson=new Gson();
+            String json = gson.toJson(week1);
+            editor.putString("Week", json);
+            editor.commit();
             weekAdapter.notifyDataSetChanged();
         }
         return true;

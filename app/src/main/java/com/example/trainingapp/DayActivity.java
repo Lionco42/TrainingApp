@@ -62,7 +62,7 @@ public class DayActivity extends AppCompatActivity implements View.OnClickListen
         day.setAdapter(dayAdapter);
         day.setOnItemClickListener(this);
 
-        spinnerAdapter = new ArrayAdapter<ExerciseType>(this, android.R.layout.simple_spinner_dropdown_item, exs.getLst());
+        spinnerAdapter = new ArrayAdapter<ExerciseType>(this, android.R.layout.simple_spinner_dropdown_item, exs.getExTypeList());
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     }
 
@@ -98,12 +98,12 @@ public class DayActivity extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        selectedEx = exs.getLst().get(i);
+        selectedEx = exs.getExTypeList().get(i);
     }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        selectedEx = exs.getLst().get(i);
+        selectedEx = exs.getExTypeList().get(i);
     }
 
     @Override

@@ -18,7 +18,7 @@ public class ExerciseListActivity extends AppCompatActivity implements View.OnCl
     Button btnReturn, btnInfo, btnCreate,btnConfirm;
     Dialog d;
     EditText etExName, etMovement;
-    ExerciseList lst;
+    ExerciseList lst=ExerciseList.sharedInstance();
     SharedPreferences sp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +58,7 @@ public class ExerciseListActivity extends AppCompatActivity implements View.OnCl
             d.show();
         }
         if(view==btnConfirm){
-            ExerciseType ex = new ExerciseType(etMovement.getText().toString(), etExName.getText().toString());
-            lst.getLst().add(ex);
+            lst.createEx(etMovement.getText().toString(), etExName.getText().toString());
             sp=getSharedPreferences("details1",0);
             SharedPreferences.Editor editor=sp.edit();
             Gson gson=new Gson();
