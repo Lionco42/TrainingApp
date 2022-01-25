@@ -1,4 +1,4 @@
-package com.example.trainingapp;
+package com.example.trainingapp.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +16,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.trainingapp.Day;
+import com.example.trainingapp.ExerciseList;
+import com.example.trainingapp.R;
+import com.example.trainingapp.Week;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;

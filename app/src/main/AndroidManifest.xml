@@ -10,19 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TrainingApp">
         <activity
-            android:name=".DayActivity"
+            android:name=".activities.DayActivity"
             android:exported="false" />
         <activity
-            android:name=".ExerciseInfoActivity"
+            android:name=".activities.ExerciseInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".ProgramStatsActivity"
+            android:name=".activities.ProgramStatsActivity"
             android:exported="false" />
         <activity
-            android:name=".ExerciseListActivity"
+            android:name=".activities.ExerciseListActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

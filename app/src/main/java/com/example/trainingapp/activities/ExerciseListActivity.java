@@ -1,4 +1,4 @@
-package com.example.trainingapp;
+package com.example.trainingapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,9 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.trainingapp.ExerciseList;
+import com.example.trainingapp.R;
 import com.google.gson.Gson;
-
-import java.util.ArrayList;
 
 public class ExerciseListActivity extends AppCompatActivity implements View.OnClickListener {
     Button btnReturn, btnInfo, btnCreate,btnConfirm;

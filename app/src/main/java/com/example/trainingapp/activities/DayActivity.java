@@ -1,4 +1,4 @@
-package com.example.trainingapp;
+package com.example.trainingapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +15,10 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.trainingapp.Exercise;
+import com.example.trainingapp.ExerciseList;
+import com.example.trainingapp.ExerciseType;
+import com.example.trainingapp.R;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
