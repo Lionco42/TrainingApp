@@ -16,17 +16,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.trainingapp.Day;
-import com.example.trainingapp.ExerciseList;
+import com.example.trainingapp.model.Day;
+import com.example.trainingapp.model.ExerciseList;
 import com.example.trainingapp.R;
-import com.example.trainingapp.Week;
+import com.example.trainingapp.model.Week;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     Week week1;
-    ArrayList<Day> dayArrayList;
     ArrayAdapter<Day> weekAdapter;
     ListView week;
     ExerciseList exs;
@@ -41,10 +40,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         week1=gson.fromJson(json,Week.class);
         if(week1==null)
             week1=Week.sharedInstance();
-        dayArrayList= week1.getDayList();
 
         week=findViewById(R.id.week);
-        weekAdapter = new ArrayAdapter<Day>(this, android.R.layout.activity_list_item, android.R.id.text1, dayArrayList) {
+        weekAdapter = new ArrayAdapter<Day>(this, android.R.layout.activity_list_item, android.R.id.text1, week1) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
@@ -59,18 +57,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         json = sp.getString("exerciseTypeList","");
         exs=gson.fromJson(json,ExerciseList.class);
-        if(exs==null)
+        if(exs==null){
             exs=ExerciseList.sharedInstance();
-        SharedPreferences.Editor editor=sp.edit();
-        json = gson.toJson(exs);
-        exs.createEx("Biceps Iso","BicepCurl");
-        exs.createEx("Horizontal Push","BenchPress");
-        exs.createEx("Horizontal Pull","CableRow");
-        exs.createEx("Vertical Pull","Pullup");
-        editor.putString("exerciseTypeList", json);
-        editor.commit();
-
-
+            SharedPreferences.Editor editor=sp.edit();
+            exs.createEx("Biceps Iso","BicepCurl");
+            exs.createEx("Horizontal Push","BenchPress");
+            exs.createEx("Horizontal Pull","CableRow");
+            exs.createEx("Vertical Pull","Pullup");
+            json = gson.toJson(exs);
+            editor.putString("exerciseTypeList", json);
+            editor.commit();}
     }
 
     @Override

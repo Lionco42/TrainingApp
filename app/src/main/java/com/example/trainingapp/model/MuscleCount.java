@@ -1,4 +1,4 @@
-package com.example.trainingapp;
+package com.example.trainingapp.model;
 
 public class MuscleCount {
     int pecs=0;

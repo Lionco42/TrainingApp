@@ -1,28 +1,23 @@
-package com.example.trainingapp;
+package com.example.trainingapp.model;
 
 import java.util.ArrayList;
 
-public class Week {
-    ArrayList<Day> dayList = new ArrayList<>();
+public class Week extends ArrayList<Day> {
     public static Week days;
-    public static int count;
+    public static int count=0;
     public static Week sharedInstance(){
         if(days==null)
             days=new Week();
         return days;
     }
-    public Week(){
+    public Week(){}
 
-        }
     public void addDay(Day day){
-        this.dayList.add(day);
+        this.add(day);
         count++;
     }
     public void removeDay(Day day){
-        this.dayList.remove(day);
-    }
-    public ArrayList<Day> getDayList(){
-        return dayList;
+        this.remove(day);
     }
     public int getCount(){
         return count;

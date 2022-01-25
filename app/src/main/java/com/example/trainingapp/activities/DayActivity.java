@@ -15,9 +15,9 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.trainingapp.Exercise;
-import com.example.trainingapp.ExerciseList;
-import com.example.trainingapp.ExerciseType;
+import com.example.trainingapp.model.Exercise;
+import com.example.trainingapp.model.ExerciseList;
+import com.example.trainingapp.model.ExerciseType;
 import com.example.trainingapp.R;
 import com.google.gson.Gson;
 
@@ -66,7 +66,7 @@ public class DayActivity extends AppCompatActivity implements View.OnClickListen
         day.setAdapter(dayAdapter);
         day.setOnItemClickListener(this);
 
-        spinnerAdapter = new ArrayAdapter<ExerciseType>(this, android.R.layout.simple_spinner_dropdown_item, exs.getExTypeList());
+        spinnerAdapter = new ArrayAdapter<ExerciseType>(this, android.R.layout.simple_spinner_dropdown_item, exs);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     }
 
@@ -102,12 +102,12 @@ public class DayActivity extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        selectedEx = exs.getExTypeList().get(i);
+        selectedEx = exs.get(i);
     }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        selectedEx = exs.getExTypeList().get(i);
+        selectedEx = exs.get(i);
     }
 
     @Override
