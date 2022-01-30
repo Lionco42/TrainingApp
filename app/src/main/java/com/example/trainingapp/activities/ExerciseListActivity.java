@@ -7,19 +7,25 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.trainingapp.TrainingAppController;
+import com.example.trainingapp.model.Exercise;
 import com.example.trainingapp.model.ExerciseList;
 import com.example.trainingapp.R;
 import com.example.trainingapp.model.ExerciseType;
 import com.google.gson.Gson;
 
-public class ExerciseListActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+import java.util.ArrayList;
+
+public class ExerciseListActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
     Button btnReturn, btnInfo, btnCreate,btnConfirm;
     Dialog d;
     EditText etExName;
@@ -27,6 +33,8 @@ public class ExerciseListActivity extends AppCompatActivity implements View.OnCl
     SharedPreferences sp;
     Spinner spinner;
     ArrayAdapter<String> spinnerAdapter;
+    ArrayAdapter<ExerciseType> exerciseTypeArrayAdapter;
+    ListView exerciseListView;
     String selectedMovement;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +46,7 @@ public class ExerciseListActivity extends AppCompatActivity implements View.OnCl
         btnInfo.setOnClickListener(this);
         btnCreate=findViewById(R.id.btnCreate);
         btnCreate.setOnClickListener(this);
+        exerciseListView=findViewById(R.id.exerciseListView);
 
         sp=getSharedPreferences("details1",0);
         Gson gson = new Gson();
@@ -48,6 +57,19 @@ public class ExerciseListActivity extends AppCompatActivity implements View.OnCl
 
         spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, ExerciseType.getMovementTypes());
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        exerciseTypeArrayAdapter = new ArrayAdapter<ExerciseType>(this, android.R.layout.activity_list_item, android.R.id.text1, lst){
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = super.getView(position, convertView, parent);
+            ExerciseType exType = (ExerciseType)exerciseListView.getAdapter().getItem(position);
+            TextView text = view.findViewById(android.R.id.text1);
+            text.setText(exType.toString()+", "+ exType.getMovement());
+            return view;
+        }
+    };
+        exerciseListView.setAdapter(exerciseTypeArrayAdapter);
+        exerciseListView.setOnItemClickListener(this);
     }
 
     @Override
@@ -80,6 +102,7 @@ public class ExerciseListActivity extends AppCompatActivity implements View.OnCl
             String json = gson.toJson(lst);
             editor.putString("exerciseTypeList", json);
             editor.commit();
+            exerciseTypeArrayAdapter.notifyDataSetChanged();
             d.dismiss();
         }
     }
@@ -94,5 +117,10 @@ public class ExerciseListActivity extends AppCompatActivity implements View.OnCl
     }
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         selectedMovement=ExerciseType.getMovementTypes()[i];
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }
