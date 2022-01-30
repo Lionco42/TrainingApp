@@ -86,10 +86,13 @@ public class ExerciseListActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        String selectedMovement=ExerciseType.getMovementTypes()[i];
+        selectedMovement=ExerciseType.getMovementTypes()[i];
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+    }
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        selectedMovement=ExerciseType.getMovementTypes()[i];
     }
 }

@@ -59,7 +59,7 @@ public class DayActivity extends AppCompatActivity implements View.OnClickListen
                 Exercise ex1 = (Exercise) day.getAdapter().getItem(position);
                 TextView text = view.findViewById(android.R.id.text1);
                 if(!dayx.isEmpty())
-                    text.setText(ex1.getName()+" Reps: "+ex1.getReps()+" Sets: "+ex1.getSets());
+                    text.setText(ex1.getName()+" ("+ex1.getType()+")"+", Reps: "+ex1.getReps()+", Sets: "+ex1.getSets());
                 return view;
             }
         };

@@ -64,6 +64,9 @@ public class ExerciseType implements Serializable {
     public static String[] getMovementTypes(){
         return movementTypes;
     }
+    public String getMovement(){
+        return this.movement;
+    }
 
     @Override
     public String toString() {
