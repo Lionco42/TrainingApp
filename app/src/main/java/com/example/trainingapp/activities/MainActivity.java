@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Intent intent = new Intent(this,DayActivity.class);
+        intent.putExtra("dayNumber", i);
         startActivity(intent);
     }
 

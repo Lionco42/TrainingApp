@@ -32,6 +32,7 @@ public class DayActivity extends AppCompatActivity implements View.OnClickListen
     ArrayAdapter<Exercise> dayAdapter;
     ListView day;
     Dialog d;
+    int dayNumber;
     Spinner spinner;
     ExerciseType selectedEx;
     ArrayAdapter<ExerciseType> spinnerAdapter;
