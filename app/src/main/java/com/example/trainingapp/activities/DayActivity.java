@@ -15,10 +15,12 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.trainingapp.model.Day;
 import com.example.trainingapp.model.Exercise;
 import com.example.trainingapp.model.ExerciseList;
 import com.example.trainingapp.model.ExerciseType;
 import com.example.trainingapp.R;
+import com.example.trainingapp.model.Week;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -27,7 +29,8 @@ public class DayActivity extends AppCompatActivity implements View.OnClickListen
     Button btnReturn, btnAddToDay, btnConfirmAdd;
     EditText etAddName, etAddReps, etAddSets;
     TextView tv;
-    ArrayList<Exercise> dayx = new ArrayList<>();
+    Week week2;
+    ArrayList<Exercise> dayx;
     ExerciseList exs;
     ArrayAdapter<Exercise> dayAdapter;
     ListView day;
@@ -53,6 +56,10 @@ public class DayActivity extends AppCompatActivity implements View.OnClickListen
         String json = sp.getString("exerciseTypeList","");
         exs=gson.fromJson(json,ExerciseList.class);
 
+        json = sp.getString("Week","");
+        week2 = gson.fromJson(json,Week.class);
+        dayNumber = getIntent().getExtras().getInt("dayNumber");
+        dayx=week2.get(dayNumber).getExsList();
         dayAdapter = new ArrayAdapter<Exercise>(this, android.R.layout.activity_list_item, android.R.id.text1, dayx) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -97,6 +104,12 @@ public class DayActivity extends AppCompatActivity implements View.OnClickListen
             Exercise ex = new Exercise(Integer.valueOf(etAddSets.getText().toString()),selectedEx, etAddReps.getText().toString());
             dayx.add(ex);
             dayAdapter.notifyDataSetChanged();
+            sp=getSharedPreferences("details1",0);
+            SharedPreferences.Editor editor=sp.edit();
+            Gson gson=new Gson();
+            String json = gson.toJson(week2);
+            editor.putString("Week", json);
+            editor.commit();
             d.dismiss();
         }
     }

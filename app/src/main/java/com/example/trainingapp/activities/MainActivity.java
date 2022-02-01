@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.trainingapp.model.Day;
+import com.example.trainingapp.model.Exercise;
 import com.example.trainingapp.model.ExerciseList;
 import com.example.trainingapp.R;
 import com.example.trainingapp.model.Week;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ListView week;
     ExerciseList exs;
     SharedPreferences sp;
+    int i=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
