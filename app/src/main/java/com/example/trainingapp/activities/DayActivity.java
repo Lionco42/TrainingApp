@@ -20,6 +20,7 @@ import com.example.trainingapp.model.Exercise;
 import com.example.trainingapp.model.ExerciseList;
 import com.example.trainingapp.model.ExerciseType;
 import com.example.trainingapp.R;
+import com.example.trainingapp.model.MuscleCount;
 import com.example.trainingapp.model.Week;
 import com.google.gson.Gson;
 
@@ -40,6 +41,7 @@ public class DayActivity extends AppCompatActivity implements View.OnClickListen
     ExerciseType selectedEx;
     ArrayAdapter<ExerciseType> spinnerAdapter;
     SharedPreferences sp;
+    MuscleCount muscleCount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +78,11 @@ public class DayActivity extends AppCompatActivity implements View.OnClickListen
 
         spinnerAdapter = new ArrayAdapter<ExerciseType>(this, android.R.layout.simple_spinner_dropdown_item, exs);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        json=sp.getString("MuscleCount","");
+        muscleCount=gson.fromJson(json,MuscleCount.class);
+        if(muscleCount==null)
+            muscleCount=new MuscleCount();
     }
 
     @Override
@@ -103,12 +110,15 @@ public class DayActivity extends AppCompatActivity implements View.OnClickListen
         if(view==btnConfirmAdd){
             Exercise ex = new Exercise(Integer.valueOf(etAddSets.getText().toString()),selectedEx, etAddReps.getText().toString());
             dayx.add(ex);
+            muscleCount.addSets(selectedEx.getMuscles(),Integer.valueOf(etAddSets.getText().toString()));
             dayAdapter.notifyDataSetChanged();
             sp=getSharedPreferences("details1",0);
             SharedPreferences.Editor editor=sp.edit();
             Gson gson=new Gson();
             String json = gson.toJson(week2);
             editor.putString("Week", json);
+            json = gson.toJson(muscleCount);
+            editor.putString("MuscleCount", json);
             editor.commit();
             d.dismiss();
         }

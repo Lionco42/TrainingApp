@@ -67,6 +67,9 @@ public class ExerciseType implements Serializable {
     public String getMovement(){
         return this.movement;
     }
+    public String[] getMuscles(){
+        return this.muscles;
+    }
 
     @Override
     public String toString() {
