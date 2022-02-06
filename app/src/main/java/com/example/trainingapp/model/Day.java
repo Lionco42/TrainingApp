@@ -20,6 +20,6 @@ public class Day implements Serializable {
         this.exsList.remove(exercise);
     }
     public String toString(){
-        return "Day"+ number;
+        return "Day"+ this.number;
     }
 }

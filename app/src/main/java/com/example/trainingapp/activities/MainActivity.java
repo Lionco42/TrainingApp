@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             startActivity(intent);
         }
         if(id==R.id.itemAddDay){
-            Day day1 = new Day(week1.getCount());
+            Day day1 = new Day(week1.size()+1);
             week1.addDay(day1);
 
             SharedPreferences.Editor editor=sp.edit();

@@ -15,12 +15,12 @@ public class Week extends ArrayList<Day> implements Serializable {
 
     public void addDay(Day day){
         this.add(day);
-        count++;
+        this.count++;
     }
     public void removeDay(Day day){
         this.remove(day);
     }
     public int getCount(){
-        return count;
+        return this.count;
     }
 }
