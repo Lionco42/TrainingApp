@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 public class ExerciseType implements Serializable {
-    String name;
-    String movement;
-    String[] muscles;
+    private String name;
+    private String movement;
+    private String[] muscles;
     public static String[]  movementTypes= {"Vertical Push","Vertical Pull","Incline Push","Horizontal Push","Squat","Hip Hinge","Fly","Horizontal Pull","Biceps Iso","Triceps Iso","Quads Iso", "Hamstrings Iso","Anterior Delts Iso","Middle Delts Iso","Rear Delts Iso","Calves Iso"};
 
     public ExerciseType(String movement, String Name){

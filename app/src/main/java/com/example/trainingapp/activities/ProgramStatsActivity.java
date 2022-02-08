@@ -2,30 +2,26 @@ package com.example.trainingapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.trainingapp.R;
-import com.example.trainingapp.model.Exercise;
-import com.example.trainingapp.model.ExerciseList;
-import com.example.trainingapp.model.ExerciseType;
-import com.example.trainingapp.model.MuscleCount;
-import com.example.trainingapp.model.Week;
+import com.example.trainingapp.model.MuscleList;
 import com.google.gson.Gson;
 
-public class ProgramStatsActivity extends AppCompatActivity implements View.OnClickListener {
+public class ProgramStatsActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
     Button btnReturnFromStats;
     ArrayAdapter<String> muscleCountArrayAdapter;
     ListView muscleCountListView;
     SharedPreferences sp;
-    MuscleCount muscleCount;
+    MuscleList muscleList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,20 +31,19 @@ public class ProgramStatsActivity extends AppCompatActivity implements View.OnCl
         sp=getSharedPreferences("details1",0);
         Gson gson = new Gson();
         String json = sp.getString("MuscleCount","");
-        muscleCount=gson.fromJson(json, MuscleCount.class);
+        muscleList =gson.fromJson(json, MuscleList.class);
 
-        muscleCountArrayAdapter = new ArrayAdapter<Exercise>(this, android.R.layout.activity_list_item, android.R.id.text1, dayx) {
+        muscleCountArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.activity_list_item, android.R.id.text1, muscleList.getMuscles()){
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
-                Exercise ex1 = (Exercise) muscleCountListView.getAdapter().getItem(position);
+                String muscle1 = (String) muscleCountListView.getAdapter().getItem(position);
                 TextView text = view.findViewById(android.R.id.text1);
-                if(!dayx.isEmpty())
-                    text.setText(ex1.getName()+" ("+ex1.getType()+")"+", Reps: "+ex1.getReps()+", Sets: "+ex1.getSets());
+                text.setText(muscle1+": "+ muscleList.getCounts()[position]);
                 return view;
             }
         };
-        muscleCountListView.setAdapter(dayAdapter);
+        muscleCountListView.setAdapter(muscleCountArrayAdapter);
         muscleCountListView.setOnItemClickListener(this);
     }
 
@@ -57,5 +52,10 @@ public class ProgramStatsActivity extends AppCompatActivity implements View.OnCl
         if(view==btnReturnFromStats){
             finish();
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
     }
 }

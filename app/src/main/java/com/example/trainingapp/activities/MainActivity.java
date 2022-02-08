@@ -17,14 +17,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.trainingapp.model.Day;
-import com.example.trainingapp.model.Exercise;
 import com.example.trainingapp.model.ExerciseList;
 import com.example.trainingapp.R;
-import com.example.trainingapp.model.MuscleCount;
+import com.example.trainingapp.model.MuscleList;
 import com.example.trainingapp.model.Week;
 import com.google.gson.Gson;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     Week week1;
@@ -32,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ListView week;
     ExerciseList exs;
     SharedPreferences sp;
-    MuscleCount muscleCount;
+    MuscleList muscleList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,10 +68,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             editor.putString("exerciseTypeList", json);
             editor.commit();}
 
-        muscleCount=new MuscleCount();
+        muscleList =new MuscleList();
         SharedPreferences.Editor editor=sp.edit();
         gson=new Gson();
-        json = gson.toJson(muscleCount);
+        json = gson.toJson(muscleList);
         editor.putString("MuscleCount", json);
         editor.commit();
     }
