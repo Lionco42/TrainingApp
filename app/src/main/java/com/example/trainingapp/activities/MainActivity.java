@@ -20,6 +20,7 @@ import com.example.trainingapp.model.Day;
 import com.example.trainingapp.model.Exercise;
 import com.example.trainingapp.model.ExerciseList;
 import com.example.trainingapp.R;
+import com.example.trainingapp.model.MuscleCount;
 import com.example.trainingapp.model.Week;
 import com.google.gson.Gson;
 
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ListView week;
     ExerciseList exs;
     SharedPreferences sp;
-    int i=0;
+    MuscleCount muscleCount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +70,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             json = gson.toJson(exs);
             editor.putString("exerciseTypeList", json);
             editor.commit();}
+
+        muscleCount=new MuscleCount();
+        SharedPreferences.Editor editor=sp.edit();
+        gson=new Gson();
+        json = gson.toJson(muscleCount);
+        editor.putString("MuscleCount", json);
+        editor.commit();
     }
 
     @Override

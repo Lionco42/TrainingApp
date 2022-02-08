@@ -1,6 +1,7 @@
 package com.example.trainingapp.model;
 
 public class MuscleCount {
+
     int pecs=0;
     int back=0;
     int antDelts=0;
@@ -12,6 +13,8 @@ public class MuscleCount {
     int hamstrings=0;
     int calves=0;
 
+    public MuscleCount(){
+    }
     public void addSets(String[] muscles, int j){
         for (String muscle : muscles) {
             if (muscle.equals("Pecs"))
