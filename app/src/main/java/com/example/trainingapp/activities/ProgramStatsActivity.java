@@ -28,19 +28,20 @@ public class ProgramStatsActivity extends AppCompatActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program_stats);
         btnReturnFromStats=findViewById(R.id.btnReturnFromStats);
+        muscleCountListView=findViewById(R.id.muscleCountListView);
         btnReturnFromStats.setOnClickListener(this);
         sp=getSharedPreferences("details1",0);
         Gson gson = new Gson();
         String json = sp.getString("MuscleCount","");
         muscleList =gson.fromJson(json, MuscleList.class);
 
-        muscleCountArrayAdapter = new ArrayAdapter<Muscle>(this, android.R.layout.activity_list_item, android.R.id.text1, muscleList.getMuscles()){
+        muscleCountArrayAdapter = new ArrayAdapter<Muscle>(this, android.R.layout.activity_list_item, android.R.id.text1, muscleList){
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
-                String muscle1 = (String) muscleCountListView.getAdapter().getItem(position);
+                String muscle1 = (String) muscleCountListView.getAdapter().getItem(position).toString();
                 TextView text = view.findViewById(android.R.id.text1);
-                text.setText(muscle1+": "+ muscleList.get(position).getCount());
+                text.setText(muscle1);
                 return view;
             }
         };

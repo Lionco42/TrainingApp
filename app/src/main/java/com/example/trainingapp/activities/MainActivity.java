@@ -68,7 +68,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             editor.putString("exerciseTypeList", json);
             editor.commit();}
 
-        muscleList = MuscleList.getInstance();
+        json = sp.getString("MuscleCount","");
+        muscleList=gson.fromJson(json,MuscleList.class);
+        if(muscleList==null)
+            muscleList = MuscleList.getInstance();
         SharedPreferences.Editor editor=sp.edit();
         gson=new Gson();
         json = gson.toJson(muscleList);
