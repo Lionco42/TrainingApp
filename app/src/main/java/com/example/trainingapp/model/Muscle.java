@@ -8,6 +8,13 @@ public class Muscle {
         this.name = name;
     }
 
+    public void editCount(int num){
+        this.count=+num;
+    }
+    public int getCount(){
+        return this.count;
+    }
+
     @Override
     public String toString() {
         return "Muscle{" +

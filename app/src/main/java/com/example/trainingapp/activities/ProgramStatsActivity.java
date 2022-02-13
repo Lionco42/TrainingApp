@@ -13,12 +13,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.trainingapp.R;
+import com.example.trainingapp.model.Muscle;
 import com.example.trainingapp.model.MuscleList;
 import com.google.gson.Gson;
 
 public class ProgramStatsActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
     Button btnReturnFromStats;
-    ArrayAdapter<String> muscleCountArrayAdapter;
+    ArrayAdapter<Muscle> muscleCountArrayAdapter;
     ListView muscleCountListView;
     SharedPreferences sp;
     MuscleList muscleList;
@@ -33,13 +34,13 @@ public class ProgramStatsActivity extends AppCompatActivity implements View.OnCl
         String json = sp.getString("MuscleCount","");
         muscleList =gson.fromJson(json, MuscleList.class);
 
-        muscleCountArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.activity_list_item, android.R.id.text1, muscleList.getMuscles()){
+        muscleCountArrayAdapter = new ArrayAdapter<Muscle>(this, android.R.layout.activity_list_item, android.R.id.text1, muscleList.getMuscles()){
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
                 String muscle1 = (String) muscleCountListView.getAdapter().getItem(position);
                 TextView text = view.findViewById(android.R.id.text1);
-                text.setText(muscle1+": "+ muscleList.getCounts()[position]);
+                text.setText(muscle1+": "+ muscleList.get(position).getCount());
                 return view;
             }
         };

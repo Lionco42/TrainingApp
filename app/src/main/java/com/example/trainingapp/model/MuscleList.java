@@ -21,29 +21,54 @@ public class MuscleList extends ArrayList<Muscle> {
 
 
     private MuscleList(){
-        Muscle pecs = new Muscle("Pecs");
-        Muscle back = new Muscle("Back");
-        Muscle antDelts = new Muscle("AntDelts");
-        Muscle midDelts = new Muscle("MedDelts");
-        Muscle rearDelts = new Muscle("RearDelts");
-        Muscle biceps = new Muscle("Biceps");
-        Muscle triceps = new Muscle("Triceps");
-        Muscle quads = new Muscle("Quads");
-        Muscle hamstrings = new Muscle("Hamstrings");
-        Muscle calves = new Muscle("Calves");
-        add(pecs);
-        add(back);
-        add(antDelts);
-        add(rearDelts);
-        add(biceps);
-        add(triceps);
-        add(quads);
-        add(midDelts);
-        add(hamstrings);
-        add(calves);
+        add(new Muscle("Pecs"));
+        add(new Muscle("Back"));
+        add(new Muscle("AntDelts"));
+        add(new Muscle("MedDelts"));
+        add(new Muscle("RearDelts"));
+        add(new Muscle("Biceps"));
+        add(new Muscle("Triceps"));
+        add(new Muscle("Quads"));
+        add(new Muscle("Hamstrings"));
+        add(new Muscle("Calves"));
     }
     public void addSets(String[] muscles, int count){
         for (String muscle : muscles) {
+            if(muscle.equals("Pecs")){
+                get(0).editCount(count);
+            }else
+            if(muscle.equals("Back")){
+                get(1).editCount(count);
+            }else
+            if(muscle.equals("AntDelts")){
+                get(2).editCount(count);
+            }else
+            if(muscle.equals("MedDelts")){
+                get(3).editCount(count);
+            }else
+            if(muscle.equals("RearDelts")){
+                get(4).editCount(count);
+            }else
+            if(muscle.equals("Biceps")){
+                get(5).editCount(count);
+            }else
+            if(muscle.equals("Triceps")){
+                get(6).editCount(count);
+            }else
+            if(muscle.equals("Quads")){
+                get(7).editCount(count);
+            }else
+            if(muscle.equals("Hamstrings")){
+                get(8).editCount(count);
+            }else
+            if(muscle.equals("Calves")){
+                get(9).editCount(count);
+            }
+
 
         }
-}}
+}
+    public MuscleList getMuscles(){
+        return this;
+    }
+}
