@@ -80,8 +80,6 @@ public class DayActivity extends AppCompatActivity implements View.OnClickListen
 
         json=sp.getString("MuscleCount","");
         muscleList =gson.fromJson(json, MuscleList.class);
-        if(muscleList ==null)
-            muscleList =MuscleList.getInstance();
     }
 
     @Override

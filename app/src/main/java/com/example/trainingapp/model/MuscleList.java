@@ -1,8 +1,9 @@
 package com.example.trainingapp.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MuscleList extends ArrayList<Muscle> {
+public class MuscleList extends ArrayList<Muscle> implements Serializable {
     public static MuscleList instance = new MuscleList();
     public static MuscleList getInstance(){
         if (instance == null) instance = new MuscleList();
@@ -34,29 +35,38 @@ public class MuscleList extends ArrayList<Muscle> {
     }
     public void addSets(String[] muscles, int count) {
         for (String muscle : muscles) {
-            if (muscle.equals("Pecs")) {
-                this.get(0).editCount(count);
-            } else if (muscle.equals("Back")) {
-                this.get(1).editCount(count);
-            } else if (muscle.equals("AntDelts")) {
-                this.get(2).editCount(count);
-            } else if (muscle.equals("MedDelts")) {
-                this.get(3).editCount(count);
-            } else if (muscle.equals("RearDelts")) {
-                this.get(4).editCount(count);
-            } else if (muscle.equals("Biceps")) {
-                this.get(5).editCount(count);
-            } else if (muscle.equals("Triceps")) {
-                this.get(6).editCount(count);
-            } else if (muscle.equals("Quads")) {
-                this.get(7).editCount(count);
-            } else if (muscle.equals("Hamstrings")) {
-                this.get(8).editCount(count);
-            } else if (muscle.equals("Calves")) {
-                this.get(9).editCount(count);
+            switch (muscle) {
+                case "Pecs":
+                    this.get(0).editCount(count);
+                    break;
+                case "Back":
+                    this.get(1).editCount(count);
+                    break;
+                case "AntDelts":
+                    this.get(2).editCount(count);
+                    break;
+                case "MedDelts":
+                    this.get(3).editCount(count);
+                    break;
+                case "RearDelts":
+                    this.get(4).editCount(count);
+                    break;
+                case "Biceps":
+                    this.get(5).editCount(count);
+                    break;
+                case "Triceps":
+                    this.get(6).editCount(count);
+                    break;
+                case "Quads":
+                    this.get(7).editCount(count);
+                    break;
+                case "Hamstrings":
+                    this.get(8).editCount(count);
+                    break;
+                case "Calves":
+                    this.get(9).editCount(count);
+                    break;
             }
-
-
         }
     }
 }
