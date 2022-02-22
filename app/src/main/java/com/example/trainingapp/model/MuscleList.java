@@ -1,37 +1,89 @@
 package com.example.trainingapp.model;
 
+import android.content.Context;
+import android.util.Log;
+
+import com.example.trainingapp.R;
+import com.google.gson.Gson;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class MuscleList extends ArrayList<Muscle> implements Serializable {
-    public static MuscleList instance = new MuscleList();
-    public static MuscleList getInstance(){
-        if (instance == null) instance = new MuscleList();
-        return instance;
+    private static final String DATA_FILE_NAME = "movies";
+    private Context context;
+
+    public MuscleList() {
+        super();
     }
-   //pecs=0
-   //back=1
-   //antDelts=2
-   //midDelts=3
-   //rearDelts=4
-   //biceps=5
-   //triceps=6
-   //quads=7
-   //hamstrings=8
-   //calves=9
 
+    public MuscleList(Context context) {
+        super();
+        this.context = context;
+        prepareDataFile();
+    }
 
-    private MuscleList(){
-        this.add(new Muscle("Pecs"));
-        this.add(new Muscle("Back"));
-        this.add(new Muscle("AntDelts"));
-        this.add(new Muscle("MedDelts"));
-        this.add(new Muscle("RearDelts"));
-        this.add(new Muscle("Biceps"));
-        this.add(new Muscle("Triceps"));
-        this.add(new Muscle("Quads"));
-        this.add(new Muscle("Hamstrings"));
-        this.add(new Muscle("Calves"));
+    private void prepareDataFile() {
+        File data = new File(context.getFilesDir(), DATA_FILE_NAME);
+        if (data.exists()) {
+            loadDataFile();
+        } else {
+            String str = readDataFromFile(context.getResources().openRawResource(R.raw.muscleList));
+            Gson gson = new Gson();
+            MuscleList moviesArrayList = gson.fromJson(str, MuscleList.class);
+            addAll(moviesArrayList);
+            saveDataFile();
+        }
+    }
+
+    private String readDataFromFile(InputStream in) {
+        String str = "";
+        try {
+            byte[] buffer=new byte[in.available()];
+            in.read(buffer);
+            str=new String(buffer, StandardCharsets.UTF_8);
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return str;
+    }
+
+    private void saveDataFile() {
+        Gson gson = new Gson();
+        String json = gson.toJson(this);
+        FileOutputStream out = null;
+
+        try {
+            out = context.openFileOutput(DATA_FILE_NAME, Context.MODE_PRIVATE);
+            out.write(json.getBytes(), 0, json.length());
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadDataFile() {
+        Gson gson = new Gson();
+        InputStream in = null;
+        String str = "";
+
+        try {
+            in = context.openFileInput(DATA_FILE_NAME);
+            byte[] buffer=new byte[in.available()];
+            in.read(buffer);
+            str=new String(buffer, StandardCharsets.UTF_8);
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        addAll(gson.fromJson(str, MuscleList.class));
     }
     public void addSets(String[] muscles, int count) {
         for (String muscle : muscles) {

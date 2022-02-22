@@ -19,9 +19,16 @@ import android.widget.TextView;
 import com.example.trainingapp.model.Day;
 import com.example.trainingapp.model.ExerciseList;
 import com.example.trainingapp.R;
+import com.example.trainingapp.model.Muscle;
 import com.example.trainingapp.model.MuscleList;
 import com.example.trainingapp.model.Week;
 import com.google.gson.Gson;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     Week week1;
@@ -69,14 +76,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             editor.commit();}
 
         json = sp.getString("MuscleCount","");
-        muscleList=gson.fromJson(json,MuscleList.class);
-        if(muscleList==null)
-            muscleList = MuscleList.getInstance();
-        SharedPreferences.Editor editor=sp.edit();
-        gson=new Gson();
-        json = gson.toJson(muscleList);
-        editor.putString("MuscleCount", json);
-        editor.commit();
+        muscleList.addAll(gson.fromJson(json,MuscleList.class));
+        if(muscleList==null){
+            muscleList = new MuscleList(this);
+            muscleList.add( new Muscle("Pecs"));
+            muscleList.add(new Muscle("Back"));
+            muscleList.add(new Muscle("AntDelts"));
+            muscleList.add(new Muscle("MedDelts"));
+            muscleList.add(new Muscle("RearDelts"));
+            muscleList.add(new Muscle("Biceps"));
+            muscleList.add(new Muscle("Triceps"));
+            muscleList.add(new Muscle("Quads"));
+            muscleList.add(new Muscle("Hamstrings"));
+            muscleList.add(new Muscle("Calves"));
+        }
     }
 
     @Override
@@ -122,4 +135,5 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
     }
+
 }

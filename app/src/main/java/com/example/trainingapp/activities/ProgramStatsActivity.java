@@ -30,10 +30,7 @@ public class ProgramStatsActivity extends AppCompatActivity implements View.OnCl
         btnReturnFromStats=findViewById(R.id.btnReturnFromStats);
         muscleCountListView=findViewById(R.id.muscleCountListView);
         btnReturnFromStats.setOnClickListener(this);
-        sp=getSharedPreferences("details1",0);
-        Gson gson = new Gson();
-        String json = sp.getString("MuscleCount","");
-        muscleList =gson.fromJson(json, MuscleList.class);
+        muscleList=new MuscleList();
 
         muscleCountArrayAdapter = new ArrayAdapter<Muscle>(this, android.R.layout.activity_list_item, android.R.id.text1, muscleList){
             @Override
