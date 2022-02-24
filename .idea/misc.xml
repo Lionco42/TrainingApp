@@ -1,32 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DesignSurface">
-    <option name="filePathToZoomLevelMap">
-      <map>
-        <entry key="..\:/Users/User/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_day.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_exercise_info.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_exercise_list.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/exerciseadd_dialog.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/exercisecreate_dialog.xml" value="0.3025949953660797" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/TrainingApp/app/src/main/res/menu/menu_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/lionc/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_day.xml" value="0.35104166666666664" />
-        <entry key="..\:/Users/lionc/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_exercise_info.xml" value="0.3415384615384615" />
-        <entry key="..\:/Users/lionc/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_exercise_list.xml" value="0.3415384615384615" />
-        <entry key="..\:/Users/lionc/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/Users/lionc/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_program_stats.xml" value="0.3415384615384615" />
-        <entry key="..\:/Users/lionc/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/exerciseadd_dialog.xml" value="0.35104166666666664" />
-        <entry key="..\:/Users/lionc/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/exercisecreate_dialog.xml" value="0.35104166666666664" />
-        <entry key="..\:/Users/lionc/AndroidStudioProjects/TrainingApp/app/src/main/res/menu/menu_main.xml" value="0.3415384615384615" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_day.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_exercise_info.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_exercise_list.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_program_stats.xml" value="0.33" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/exerciseadd_dialog.xml" value="0.3111111111111111" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/exercisecreate_dialog.xml" value="0.20520833333333333" />
-      </map>
-    </option>
-  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

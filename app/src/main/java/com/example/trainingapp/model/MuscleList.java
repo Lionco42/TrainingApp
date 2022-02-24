@@ -33,7 +33,7 @@ public class MuscleList extends ArrayList<Muscle> implements Serializable {
         if (data.exists()) {
             loadDataFile();
         } else {
-            String str = readDataFromFile(context.getResources().openRawResource(R.raw.muscleList));
+            String str = readDataFromFile(context.getResources().openRawResource(R.raw.muscles));
             Gson gson = new Gson();
             MuscleList moviesArrayList = gson.fromJson(str, MuscleList.class);
             addAll(moviesArrayList);
