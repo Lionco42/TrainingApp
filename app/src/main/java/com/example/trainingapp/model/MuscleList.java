@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class MuscleList extends ArrayList<Muscle> implements Serializable {
-    private static final String DATA_FILE_NAME = "movies";
+    private static final String DATA_FILE_NAME = "muscle";
     private Context context;
 
     public MuscleList() {
@@ -33,7 +33,7 @@ public class MuscleList extends ArrayList<Muscle> implements Serializable {
         if (data.exists()) {
             loadDataFile();
         } else {
-            String str = readDataFromFile(context.getResources().openRawResource(R.raw.muscles));
+            String str = readDataFromFile(context.getResources().openRawResource(R.raw.muscle));
             Gson gson = new Gson();
             MuscleList moviesArrayList = gson.fromJson(str, MuscleList.class);
             addAll(moviesArrayList);

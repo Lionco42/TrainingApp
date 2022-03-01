@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ListView week;
     ExerciseList exs;
     SharedPreferences sp;
-    MuscleList muscleList;
+    MuscleList muscleList= new MuscleList();
+    String str;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,11 +76,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             editor.putString("exerciseTypeList", json);
             editor.commit();}
 
-        json = sp.getString("MuscleCount","");
-        muscleList.addAll(gson.fromJson(json,MuscleList.class));
-        if(muscleList==null){
-            muscleList = new MuscleList(this);
-            muscleList.add( new Muscle("Pecs"));
+        if(muscleList.isEmpty()){
+            muscleList.add(new Muscle("Pecs"));
             muscleList.add(new Muscle("Back"));
             muscleList.add(new Muscle("AntDelts"));
             muscleList.add(new Muscle("MedDelts"));
