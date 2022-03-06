@@ -35,8 +35,8 @@ public class MuscleList extends ArrayList<Muscle> implements Serializable {
         } else {
             String str = readDataFromFile(context.getResources().openRawResource(R.raw.muscle));
             Gson gson = new Gson();
-            MuscleList moviesArrayList = gson.fromJson(str, MuscleList.class);
-            addAll(moviesArrayList);
+            MuscleList musclesArrayList = gson.fromJson(str, MuscleList.class);
+            addAll(musclesArrayList);
             saveDataFile();
         }
     }
@@ -120,5 +120,6 @@ public class MuscleList extends ArrayList<Muscle> implements Serializable {
                     break;
             }
         }
+        saveDataFile();
     }
 }

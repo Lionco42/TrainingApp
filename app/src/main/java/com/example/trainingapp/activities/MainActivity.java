@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -35,19 +36,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ArrayAdapter<Day> weekAdapter;
     ListView week;
     ExerciseList exs;
-    SharedPreferences sp;
-    MuscleList muscleList= new MuscleList();
-    String str;
+    MuscleList muscleList= new MuscleList(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        sp=getSharedPreferences("details1",0);
         Gson gson = new Gson();
-        String json = sp.getString("Week","");
-        week1=gson.fromJson(json,Week.class);
-        if(week1==null)
-            week1=Week.sharedInstance();
+        String json;
+        week1= new Week(this);
 
         week=findViewById(R.id.week);
         weekAdapter = new ArrayAdapter<Day>(this, android.R.layout.activity_list_item, android.R.id.text1, week1) {
@@ -62,20 +58,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         };
         week.setAdapter(weekAdapter);
         week.setOnItemClickListener(this);
-
-        json = sp.getString("exerciseTypeList","");
-        exs=gson.fromJson(json,ExerciseList.class);
-        if(exs==null){
-            exs=ExerciseList.sharedInstance();
-            SharedPreferences.Editor editor=sp.edit();
-            exs.createEx("Biceps Iso","BicepCurl");
-            exs.createEx("Horizontal Push","BenchPress");
-            exs.createEx("Horizontal Pull","CableRow");
-            exs.createEx("Vertical Pull","Pullup");
-            json = gson.toJson(exs);
-            editor.putString("exerciseTypeList", json);
-            editor.commit();}
-
+        exs= new ExerciseList(this);
         if(muscleList.isEmpty()){
             muscleList.add(new Muscle("Pecs"));
             muscleList.add(new Muscle("Back"));
@@ -111,12 +94,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if(id==R.id.itemAddDay){
             Day day1 = new Day(week1.size()+1);
             week1.addDay(day1);
-
-            SharedPreferences.Editor editor=sp.edit();
-            Gson gson=new Gson();
-            String json = gson.toJson(week1);
-            editor.putString("Week", json);
-            editor.commit();
             weekAdapter.notifyDataSetChanged();
         }
         return true;
