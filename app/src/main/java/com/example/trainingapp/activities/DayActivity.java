@@ -25,7 +25,7 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
-public class DayActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
+public class  DayActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
     Button btnReturn, btnAddToDay, btnConfirmAdd;
     EditText etAddName, etAddReps, etAddSets;
     TextView tv;

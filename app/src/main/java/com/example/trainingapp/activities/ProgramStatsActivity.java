@@ -21,7 +21,6 @@ public class ProgramStatsActivity extends AppCompatActivity implements View.OnCl
     Button btnReturnFromStats;
     ArrayAdapter<Muscle> muscleCountArrayAdapter;
     ListView muscleCountListView;
-    SharedPreferences sp;
     MuscleList muscleList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +29,6 @@ public class ProgramStatsActivity extends AppCompatActivity implements View.OnCl
         btnReturnFromStats=findViewById(R.id.btnReturnFromStats);
         muscleCountListView=findViewById(R.id.muscleCountListView);
         btnReturnFromStats.setOnClickListener(this);
-        muscleList=new MuscleList();
 
         muscleCountArrayAdapter = new ArrayAdapter<Muscle>(this, android.R.layout.activity_list_item, android.R.id.text1, muscleList){
             @Override

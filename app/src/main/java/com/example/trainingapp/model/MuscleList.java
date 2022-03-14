@@ -15,17 +15,16 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class MuscleList extends ArrayList<Muscle> implements Serializable {
-    private static final String DATA_FILE_NAME = "movies";
+    private static final String DATA_FILE_NAME = "muscle";
     private Context context;
-
-    public MuscleList() {
-        super();
-    }
-
-    public MuscleList(Context context) {
-        super();
+    public MuscleList(){}
+    private static MuscleList instance;
+    public void setContext(Context context){
         this.context = context;
-        prepareDataFile();
+    }
+    public static MuscleList getInstance(){
+        if (instance == null) instance = new MuscleList();
+        return instance;
     }
 
     private void prepareDataFile() {
@@ -33,10 +32,10 @@ public class MuscleList extends ArrayList<Muscle> implements Serializable {
         if (data.exists()) {
             loadDataFile();
         } else {
-            String str = readDataFromFile(context.getResources().openRawResource(R.raw.muscles));
+            String str = readDataFromFile(context.getResources().openRawResource(R.raw.muscle));
             Gson gson = new Gson();
-            MuscleList moviesArrayList = gson.fromJson(str, MuscleList.class);
-            addAll(moviesArrayList);
+            MuscleList musclesArrayList = gson.fromJson(str, MuscleList.class);
+            addAll(musclesArrayList);
             saveDataFile();
         }
     }
@@ -120,5 +119,6 @@ public class MuscleList extends ArrayList<Muscle> implements Serializable {
                     break;
             }
         }
+        saveDataFile();
     }
 }

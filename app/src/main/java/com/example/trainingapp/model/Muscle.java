@@ -1,8 +1,8 @@
 package com.example.trainingapp.model;
 
-public class Muscle {
-    int count;
-    String name;
+public class Muscle implements java.io.Serializable {
+    private int count;
+    private String name;
     public Muscle(String name){
         this.count=0;
         this.name = name;
