@@ -14,27 +14,28 @@ import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-public class MuscleList extends ArrayList<Muscle> implements Serializable {
+public class MuscleList extends java.util.ArrayList<Muscle> implements Serializable {
     private static final String DATA_FILE_NAME = "muscle";
     private Context context;
-    public MuscleList(){}
-    private static MuscleList instance;
-    public void setContext(Context context){
+    public MuscleList(Context context){
+        super();
         this.context = context;
+        prepareDataFile();
     }
-    public static MuscleList getInstance(){
-        if (instance == null) instance = new MuscleList();
+    private static MuscleList instance;
+    public static MuscleList getInstance(Context context){
+        if (instance == null) instance = new MuscleList(context);
         return instance;
     }
 
-    private void prepareDataFile() {
+    public void prepareDataFile() {
         File data = new File(context.getFilesDir(), DATA_FILE_NAME);
         if (data.exists()) {
             loadDataFile();
         } else {
             String str = readDataFromFile(context.getResources().openRawResource(R.raw.muscle));
             Gson gson = new Gson();
-            MuscleList musclesArrayList = gson.fromJson(str, MuscleList.class);
+            ArrayList<Muscle> musclesArrayList = (ArrayList<Muscle>) gson.fromJson(str, MuscleList.class);
             addAll(musclesArrayList);
             saveDataFile();
         }

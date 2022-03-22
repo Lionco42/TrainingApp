@@ -3,7 +3,7 @@ package com.example.trainingapp.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Day extends ArrayList<Exercise> implements Serializable {
+public class Day extends java.util.ArrayList<Exercise> implements Serializable {
     int number;
     ArrayList<Exercise> exsList;
     public Day(int num){

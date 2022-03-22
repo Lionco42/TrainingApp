@@ -1,6 +1,7 @@
 package com.example.trainingapp.model;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 
 import com.example.trainingapp.R;
 import com.google.gson.Gson;
@@ -13,16 +14,20 @@ import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-public class Week extends ArrayList<Day> implements Serializable {
+public class Week extends java.util.ArrayList<Day> implements Serializable {
     private static final String DATA_FILE_NAME = "week";
     public static Week instance;
     private Context context;
     public static int count=0;
-    public static Week getInstance(){
-        if (instance == null) instance = new Week();
+    public static Week getInstance(Context context){
+        if (instance == null) instance = new Week(context);
         return instance;
     }
-    private Week(){}
+    private Week(Context context){
+        super();
+        this.context = context;
+        prepareDataFile();
+    }
     public void setContext(Context context){
         this.context = context;
     }
@@ -33,7 +38,7 @@ public class Week extends ArrayList<Day> implements Serializable {
     }
 
 
-    private void prepareDataFile() {
+    public void prepareDataFile() {
         File data = new File(context.getFilesDir(), DATA_FILE_NAME);
         if (data.exists()) {
             loadDataFile();
@@ -88,7 +93,7 @@ public class Week extends ArrayList<Day> implements Serializable {
             e.printStackTrace();
         }
 
-        ArrayList<Day> days = gson.fromJson(str, Week.class);
+        Week days = gson.fromJson(str, Week.class);
         addAll(days);
     }
     public void removeDay(Day day){

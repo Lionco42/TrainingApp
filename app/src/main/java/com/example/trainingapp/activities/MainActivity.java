@@ -41,15 +41,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        week1=Week.getInstance();
-        week1.setContext(this);
+        muscleList=MuscleList.getInstance(this);
+        week1=Week.getInstance(this);
 
         week=findViewById(R.id.week);
         weekAdapter = new ArrayAdapter<Day>(this, android.R.layout.activity_list_item, android.R.id.text1, week1) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
-                Day day1 = week1.get(position);
+                Day day1 = (Day) week1.get(position);
                 TextView text = view.findViewById(android.R.id.text1);
                 text.setText(day1.toString());
                 return view;
