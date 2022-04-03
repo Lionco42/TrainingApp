@@ -1,24 +1,29 @@
 package com.example.trainingapp.model;
 
+import static com.example.trainingapp.model.Week.instance;
+
 import android.content.Context;
 
 import com.example.trainingapp.R;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-public class ExerciseList extends ArrayList<ExerciseType> implements Serializable {
+public class ExerciseList extends java.util.ArrayList<ExerciseType> implements Serializable {
     private static final String DATA_FILE_NAME = "exercisetypelist";
     private Context context;
-
-    public ExerciseList() {
-        super();
+    public static ExerciseList instance;
+    public static ExerciseList getInstance(Context context){
+        if (instance == null) instance = new ExerciseList(context);
+        return instance;
     }
 
     public ExerciseList(Context context) {
@@ -34,8 +39,9 @@ public class ExerciseList extends ArrayList<ExerciseType> implements Serializabl
         } else {
             String str = readDataFromFile(context.getResources().openRawResource(R.raw.exercisettypelist));
             Gson gson = new Gson();
-            ExerciseList exerciselist = gson.fromJson(str, ExerciseList.class);
-            addAll(exerciselist);
+            Type listType = new TypeToken<ArrayList<ExerciseType>>(){}.getType();
+            ArrayList<ExerciseType> exs = gson.fromJson(str, listType);
+            addAll(exs);
             saveDataFile();
         }
     }
@@ -60,7 +66,7 @@ public class ExerciseList extends ArrayList<ExerciseType> implements Serializabl
 
         try {
             out = context.openFileOutput(DATA_FILE_NAME, Context.MODE_PRIVATE);
-            out.write(json.getBytes(), 0, json.length());
+            out.write(json.getBytes(), 0, json.getBytes().length);
             out.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -81,8 +87,9 @@ public class ExerciseList extends ArrayList<ExerciseType> implements Serializabl
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        addAll(gson.fromJson(str, ExerciseList.class));
+        Type listType = new TypeToken<ArrayList<ExerciseType>>(){}.getType();
+        ArrayList<ExerciseType> exs = gson.fromJson(str, listType);
+        addAll(exs);
     }
     public void createEx(String type, String name) {
         ExerciseType ex = new ExerciseType(type, name);
