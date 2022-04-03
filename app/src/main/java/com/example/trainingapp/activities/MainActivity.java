@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 View view = super.getView(position, convertView, parent);
                 Day day1 = (Day) week1.get(position);
                 TextView text = view.findViewById(android.R.id.text1);
-                text.setText(day1.toString());
+                text.setText(day1.toString(position));
                 return view;
             }
         };
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             startActivity(intent);
         }
         if(id==R.id.itemAddDay){
-            Day day1 = new Day(week1.size()+1);
+            Day day1 = new Day();
             week1.addDay(day1);
             weekAdapter.notifyDataSetChanged();
         }

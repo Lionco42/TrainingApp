@@ -57,10 +57,9 @@ public class  DayActivity extends AppCompatActivity implements View.OnClickListe
         String json = sp.getString("exerciseTypeList","");
         exs=gson.fromJson(json,ExerciseList.class);
 
-        json = sp.getString("Week","");
-        week2 = gson.fromJson(json,Week.class);
+        week2=Week.getInstance(this);
         dayNumber = getIntent().getExtras().getInt("dayNumber");
-        dayx=week2.get(dayNumber).getExsList();
+        dayx=week2.get(dayNumber);
         dayAdapter = new ArrayAdapter<Exercise>(this, android.R.layout.activity_list_item, android.R.id.text1, dayx) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {

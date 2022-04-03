@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class ExerciseList extends ArrayList<ExerciseType> implements Serializable {
-    private static final String DATA_FILE_NAME = "exerciselist";
+    private static final String DATA_FILE_NAME = "exercisetypelist";
     private Context context;
 
     public ExerciseList() {
@@ -32,7 +32,7 @@ public class ExerciseList extends ArrayList<ExerciseType> implements Serializabl
         if (data.exists()) {
             loadDataFile();
         } else {
-            String str = readDataFromFile(context.getResources().openRawResource(R.raw.exerciselist));
+            String str = readDataFromFile(context.getResources().openRawResource(R.raw.exercisettypelist));
             Gson gson = new Gson();
             ExerciseList exerciselist = gson.fromJson(str, ExerciseList.class);
             addAll(exerciselist);

@@ -1,42 +1,42 @@
 [
   {
-    "name": "Pecs",
-    "count": 0
+    "count": 0,
+    "name": "Pecs"
   },
   {
-    "name": "Back",
-    "count": 0
+    "count": 0,
+    "name": "Back"
   },
   {
-    "name": "AntDelts",
-    "count": 0
+    "count": 0,
+    "name": "AntDelts"
   },
   {
-    "name": "MedDelts",
-    "count": 0
+    "count": 0,
+    "name": "MedDelts"
   },
   {
-    "name": "RearDelts",
-    "count": 0
+    "count": 0,
+    "name": "RearDelts"
   },
   {
-    "name": "Biceps",
-    "count": 0
+    "count": 0,
+    "name": "Biceps"
   },
   {
-    "name": "Triceps",
-    "count": 0
+    "count": 0,
+    "name": "Triceps"
   },
   {
-    "name": "Quads",
-    "count": 0
+    "count": 0,
+    "name": "Quads"
   },
   {
-    "name": "Hamstrings",
-    "count": 0
+    "count": 0,
+    "name": "Hamstrings"
   },
   {
-    "name": "Calves",
-    "count": 0
+    "count": 0,
+    "name": "Calves"
   }
 ]

@@ -1,17 +1,1 @@
-[{
-  "movement": "Horizontal Push",
-  "count": "Bench Press"
-},
-  {
-    "movement": "Horizontal Pull",
-    "name": "Cable Row"
-  },
-  {
-    "movement": "Biceps Iso",
-    "name": "Bicep Curl"
-  },
-  {
-    "movement": "Vertical Pull",
-    "name": "Pullup"
-  }
-]
+[{"ExerciseType": "Horizontal Push", "reps": "10", "sets": 3},{"ExerciseType": "Vertical Pull", "reps": "10", "sets": 3}]

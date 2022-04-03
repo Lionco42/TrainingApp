@@ -1,0 +1,17 @@
+[{
+  "movement": "Horizontal Push",
+  "count": "Bench Press"
+},
+  {
+    "movement": "Horizontal Pull",
+    "name": "Cable Row"
+  },
+  {
+    "movement": "Biceps Iso",
+    "name": "Bicep Curl"
+  },
+  {
+    "movement": "Vertical Pull",
+    "name": "Pullup"
+  }
+]

@@ -5,12 +5,14 @@ import android.util.Log;
 
 import com.example.trainingapp.R;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
@@ -28,6 +30,11 @@ public class MuscleList extends java.util.ArrayList<Muscle> implements Serializa
         return instance;
     }
 
+    private void test(){
+        add(new Muscle("yoav"));
+        add(new Muscle("yoav1"));
+        saveDataFile();
+    }
     public void prepareDataFile() {
         File data = new File(context.getFilesDir(), DATA_FILE_NAME);
         if (data.exists()) {
@@ -35,7 +42,8 @@ public class MuscleList extends java.util.ArrayList<Muscle> implements Serializa
         } else {
             String str = readDataFromFile(context.getResources().openRawResource(R.raw.muscle));
             Gson gson = new Gson();
-            ArrayList<Muscle> musclesArrayList = (ArrayList<Muscle>) gson.fromJson(str, MuscleList.class);
+            Type listType = new TypeToken<ArrayList<Muscle>>(){}.getType();
+            ArrayList<Muscle> musclesArrayList = gson.fromJson(str, listType);
             addAll(musclesArrayList);
             saveDataFile();
         }
@@ -61,7 +69,7 @@ public class MuscleList extends java.util.ArrayList<Muscle> implements Serializa
 
         try {
             out = context.openFileOutput(DATA_FILE_NAME, Context.MODE_PRIVATE);
-            out.write(json.getBytes(), 0, json.length());
+            out.write(json.getBytes(), 0, json.getBytes().length);
             out.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -82,8 +90,8 @@ public class MuscleList extends java.util.ArrayList<Muscle> implements Serializa
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        addAll(gson.fromJson(str, MuscleList.class));
+        Type listType = new TypeToken<MuscleList>(){}.getType();
+        addAll(gson.fromJson(str, listType));
     }
     public void addSets(String[] muscles, int count) {
         for (String muscle : muscles) {

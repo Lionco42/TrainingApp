@@ -4,12 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Day extends java.util.ArrayList<Exercise> implements Serializable {
-    int number;
-    ArrayList<Exercise> exsList;
-    public Day(int num){
-        this.number=num;
-        this.exsList = new ArrayList<>();
+    //int number;
+    //ArrayList<Exercise> exsList;
+    public Day(){
     }
+    /*
     public ArrayList<Exercise> getExsList(){
         return this.exsList;
     }
@@ -19,7 +18,8 @@ public class Day extends java.util.ArrayList<Exercise> implements Serializable {
     public void removeExercise(Exercise exercise){
         this.exsList.remove(exercise);
     }
-    public String toString(){
-        return "Day"+ this.number;
+     */
+    public String toString(int number){
+        return "Day"+ number;
     }
 }

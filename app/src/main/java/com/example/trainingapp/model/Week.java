@@ -5,12 +5,14 @@ import android.content.ContextWrapper;
 
 import com.example.trainingapp.R;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
@@ -26,6 +28,7 @@ public class Week extends java.util.ArrayList<Day> implements Serializable {
     private Week(Context context){
         super();
         this.context = context;
+        //test();
         prepareDataFile();
     }
     public void setContext(Context context){
@@ -37,6 +40,19 @@ public class Week extends java.util.ArrayList<Day> implements Serializable {
         saveDataFile();
     }
 
+    /*private void test(){
+        ExerciseType exerciseType1 = new ExerciseType("Vertical Pull", "Pullup");
+        Exercise ex1 = new Exercise(3, exerciseType1, "10");
+        Day day1 = new Day();
+        day1.add(ex1);
+        ExerciseType exerciseType2 = new ExerciseType("Vertical Push", "OHP");
+        Exercise ex2 = new Exercise(3, exerciseType2, "10");
+        Day day2 = new Day();
+        day2.add(ex2);
+        add(day1);
+        add(day2);
+        saveDataFile();
+    }*/
 
     public void prepareDataFile() {
         File data = new File(context.getFilesDir(), DATA_FILE_NAME);
@@ -45,7 +61,8 @@ public class Week extends java.util.ArrayList<Day> implements Serializable {
         } else {
             String str = readDataFromFile(context.getResources().openRawResource(R.raw.week));
             Gson gson = new Gson();
-            Week daysArrayList = gson.fromJson(str, Week.class);
+            Type listType = new TypeToken<ArrayList<Day>>(){}.getType();
+            ArrayList<Day> daysArrayList = gson.fromJson(str, listType);
             addAll(daysArrayList);
             saveDataFile();
         }
@@ -71,7 +88,7 @@ public class Week extends java.util.ArrayList<Day> implements Serializable {
 
         try {
             out = context.openFileOutput(DATA_FILE_NAME, Context.MODE_PRIVATE);
-            out.write(json.getBytes(), 0, json.length());
+            out.write(json.getBytes(), 0, json.getBytes().length);
             out.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -92,8 +109,8 @@ public class Week extends java.util.ArrayList<Day> implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        Week days = gson.fromJson(str, Week.class);
+        Type listType = new TypeToken<ArrayList<Day>>(){}.getType();
+        ArrayList<Day> days = gson.fromJson(str, listType);
         addAll(days);
     }
     public void removeDay(Day day){
