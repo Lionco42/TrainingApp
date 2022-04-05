@@ -58,6 +58,7 @@ public class  DayActivity extends AppCompatActivity implements View.OnClickListe
 
         week2=Week.getInstance(this);
         exs= ExerciseList.getInstance(this);
+        muscleList =muscleList.getInstance(this);
         dayNumber = getIntent().getExtras().getInt("dayNumber");
         dayx=week2.get(dayNumber);
         dayAdapter = new ArrayAdapter<Exercise>(this, android.R.layout.activity_list_item, android.R.id.text1, dayx) {
@@ -77,8 +78,7 @@ public class  DayActivity extends AppCompatActivity implements View.OnClickListe
         spinnerAdapter = new ArrayAdapter<ExerciseType>(this, android.R.layout.simple_spinner_dropdown_item, exs);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        json=sp.getString("MuscleCount","");
-        muscleList =gson.fromJson(json, MuscleList.class);
+
     }
 
     @Override
@@ -108,14 +108,6 @@ public class  DayActivity extends AppCompatActivity implements View.OnClickListe
             dayx.add(ex);
             muscleList.addSets(selectedEx.getMuscles(),Integer.valueOf(etAddSets.getText().toString()));
             dayAdapter.notifyDataSetChanged();
-            sp=getSharedPreferences("details1",0);
-            SharedPreferences.Editor editor=sp.edit();
-            Gson gson=new Gson();
-            String json = gson.toJson(week2);
-            editor.putString("Week", json);
-            json = gson.toJson(muscleList);
-            editor.putString("MuscleCount", json);
-            editor.commit();
             d.dismiss();
         }
     }

@@ -1,6 +1,6 @@
 [{
   "movement": "Horizontal Push",
-  "count": "Bench Press"
+  "name": "Bench Press"
 },
   {
     "movement": "Horizontal Pull",

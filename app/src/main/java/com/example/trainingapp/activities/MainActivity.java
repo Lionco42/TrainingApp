@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             muscleList.add(new Muscle("Quads"));
             muscleList.add(new Muscle("Hamstrings"));
             muscleList.add(new Muscle("Calves"));
+            muscleList.saveDataFile();
         }
     }
 
