@@ -29,7 +29,7 @@ public class ExerciseListActivity extends AppCompatActivity implements View.OnCl
     Button btnReturn, btnInfo, btnCreate,btnConfirm;
     Dialog d;
     EditText etExName;
-    ExerciseList lst = new ExerciseList(this);
+    ExerciseList lst = ExerciseList.getInstance(this);
     SharedPreferences sp;
     Spinner spinner;
     ArrayAdapter<String> spinnerAdapter;
@@ -48,9 +48,6 @@ public class ExerciseListActivity extends AppCompatActivity implements View.OnCl
         btnCreate.setOnClickListener(this);
         exerciseListView=findViewById(R.id.exerciseListView);
 
-        sp=getSharedPreferences("details1",0);
-        Gson gson = new Gson();
-        String json = sp.getString("exerciseTypeList","");
 
         spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, ExerciseType.getMovementTypes());
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
