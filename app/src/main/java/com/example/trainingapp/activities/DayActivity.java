@@ -106,6 +106,7 @@ public class  DayActivity extends AppCompatActivity implements View.OnClickListe
         if(view==btnConfirmAdd){
             Exercise ex = new Exercise(Integer.valueOf(etAddSets.getText().toString()),selectedEx, etAddReps.getText().toString());
             dayx.add(ex);
+            week2.saveDataFile();
             muscleList.addSets(selectedEx.getMuscles(),Integer.valueOf(etAddSets.getText().toString()));
             dayAdapter.notifyDataSetChanged();
             d.dismiss();

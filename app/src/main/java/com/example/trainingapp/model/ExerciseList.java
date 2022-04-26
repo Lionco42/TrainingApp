@@ -59,7 +59,7 @@ public class ExerciseList extends java.util.ArrayList<ExerciseType> implements S
         return str;
     }
 
-    private void saveDataFile() {
+    public void saveDataFile() {
         Gson gson = new Gson();
         String json = gson.toJson(this);
         FileOutputStream out = null;

@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.example.trainingapp.model.Day;
 import com.example.trainingapp.model.ExerciseList;
 import com.example.trainingapp.R;
+import com.example.trainingapp.model.ExerciseType;
 import com.example.trainingapp.model.Muscle;
 import com.example.trainingapp.model.MuscleList;
 import com.example.trainingapp.model.Week;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
         muscleList=MuscleList.getInstance(this);
         week1=Week.getInstance(this);
+        exs= ExerciseList.getInstance(this);
 
         week=findViewById(R.id.week);
         weekAdapter = new ArrayAdapter<Day>(this, android.R.layout.activity_list_item, android.R.id.text1, week1) {
@@ -57,19 +59,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         };
         week.setAdapter(weekAdapter);
         week.setOnItemClickListener(this);
-        exs= new ExerciseList(this);
-        if(muscleList.isEmpty()){
-            muscleList.add(new Muscle("Pecs"));
-            muscleList.add(new Muscle("Back"));
-            muscleList.add(new Muscle("AntDelts"));
-            muscleList.add(new Muscle("MedDelts"));
-            muscleList.add(new Muscle("RearDelts"));
-            muscleList.add(new Muscle("Biceps"));
-            muscleList.add(new Muscle("Triceps"));
-            muscleList.add(new Muscle("Quads"));
-            muscleList.add(new Muscle("Hamstrings"));
-            muscleList.add(new Muscle("Calves"));
-            muscleList.saveDataFile();
+
+        if(exs.isEmpty()){
+            exs.add(new ExerciseType("Horizontal Push","Bench Press"));
+            exs.add(new ExerciseType("Horizontal Pull","Cable Row"));
+            exs.add(new ExerciseType("Biceps Iso","Hammer Curl"));
+            exs.add(new ExerciseType("Vertical Pull","Pullup"));
+            exs.saveDataFile();
         }
     }
 

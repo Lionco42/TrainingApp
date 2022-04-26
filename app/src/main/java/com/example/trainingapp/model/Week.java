@@ -81,7 +81,7 @@ public class Week extends java.util.ArrayList<Day> implements Serializable {
         return str;
     }
 
-    private void saveDataFile() {
+    public void saveDataFile() {
         Gson gson = new Gson();
         String json = gson.toJson(this);
         FileOutputStream out = null;

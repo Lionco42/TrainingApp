@@ -29,6 +29,7 @@ public class ProgramStatsActivity extends AppCompatActivity implements View.OnCl
         btnReturnFromStats=findViewById(R.id.btnReturnFromStats);
         muscleCountListView=findViewById(R.id.muscleCountListView);
         btnReturnFromStats.setOnClickListener(this);
+        muscleList=MuscleList.getInstance(this);
 
         muscleCountArrayAdapter = new ArrayAdapter<Muscle>(this, android.R.layout.activity_list_item, android.R.id.text1, muscleList){
             @Override
