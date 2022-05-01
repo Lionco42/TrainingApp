@@ -4,10 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.telephony.PhoneStateListener;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ListView week;
     ExerciseList exs;
     MuscleList muscleList;
+    PhoneCallReciever phoneCallReciever;
+    private static final int PHONE_STATE_PERMISSION_REQUEST_CODE=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +53,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         muscleList=MuscleList.getInstance(this);
         week1=Week.getInstance(this);
         exs= ExerciseList.getInstance(this);
+        phoneCallReciever = new PhoneCallReciever();
+
+        if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED)
+            requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_CALL_LOG, Manifest.permission.SEND_SMS}, PHONE_STATE_PERMISSION_REQUEST_CODE);
+
 
         week=findViewById(R.id.week);
         weekAdapter = new ArrayAdapter<Day>(this, android.R.layout.activity_list_item, android.R.id.text1, week1) {
@@ -68,6 +81,32 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             exs.saveDataFile();
         }
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(phoneCallReciever, new IntentFilter("android.intent.action.PHONE_STATE"));
+        Log.d("BRPHONEDEMO", "onResume");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(phoneCallReciever);
+        Log.d("BRPHONEDEMO", "onPause");
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        Log.d("BRPHONEDEMO", "onRequestPermissionsResult");
+        if (requestCode == PHONE_STATE_PERMISSION_REQUEST_CODE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            Log.d("BRPHONEDEMO", "onRequestPermissionsResult = OK");
+    }
+
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

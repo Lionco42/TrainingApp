@@ -49,12 +49,7 @@ public class  DayActivity extends AppCompatActivity implements View.OnClickListe
         btnReturn.setOnClickListener(this);
         btnAddToDay=findViewById(R.id.btnAddToDay);
         btnAddToDay.setOnClickListener(this);
-        tv=findViewById(R.id.dayTitleTv);
         day=findViewById(R.id.day);
-
-        sp=getSharedPreferences("details1",0);
-        Gson gson = new Gson();
-        String json = sp.getString("exerciseTypeList","");
 
         week2=Week.getInstance(this);
         exs= ExerciseList.getInstance(this);
