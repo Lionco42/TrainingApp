@@ -1,10 +1,13 @@
 package com.example.trainingapp.activities;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 
@@ -20,6 +23,13 @@ public class PhoneCallReciever extends BroadcastReceiver {
             public void onCallStateChanged(int state, String incomingNumber){
                 super.onCallStateChanged(state, incomingNumber);
                 if(state==TelephonyManager.CALL_STATE_RINGING){
+
+                    Intent intent= new Intent();
+                    intent.setAction(Intent.ACTION_CALL);
+                    Uri uri = Uri.parse("tel:054-5555555");
+                    intent.setData(uri);
+                    //startActivity(intent);
+
                     Notification.Builder builder=new Notification.Builder(context);
                     builder.setContentText(incomingNumber);
                     builder.setSmallIcon(android.R.drawable.star_on);
