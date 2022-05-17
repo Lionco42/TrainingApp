@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.trainingapp.model.Day;
 import com.example.trainingapp.model.Exercise;
 import com.example.trainingapp.model.ExerciseList;
 import com.example.trainingapp.model.ExerciseType;
@@ -30,7 +31,7 @@ public class  DayActivity extends AppCompatActivity implements View.OnClickListe
     EditText etAddName, etAddReps, etAddSets;
     TextView tv;
     Week week2;
-    ArrayList<Exercise> dayx;
+    Day dayx;
     ExerciseList exs;
     ArrayAdapter<Exercise> dayAdapter;
     ListView day;
@@ -48,6 +49,7 @@ public class  DayActivity extends AppCompatActivity implements View.OnClickListe
         btnReturn.setOnClickListener(this);
         btnAddToDay=findViewById(R.id.btnAddToDay);
         btnAddToDay.setOnClickListener(this);
+        tv=findViewById(R.id.tvDayName);
         day=findViewById(R.id.day);
 
         week2=Week.getInstance(this);
@@ -100,8 +102,8 @@ public class  DayActivity extends AppCompatActivity implements View.OnClickListe
         if(view==btnConfirmAdd){
             Exercise ex = new Exercise(Integer.valueOf(etAddSets.getText().toString()),selectedEx, etAddReps.getText().toString());
             dayx.add(ex);
-            week2.saveDataFile();
             muscleList.addSets(selectedEx.getMuscles(),Integer.valueOf(etAddSets.getText().toString()));
+            week2.saveDataFile();
             dayAdapter.notifyDataSetChanged();
             d.dismiss();
         }

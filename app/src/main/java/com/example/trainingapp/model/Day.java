@@ -8,6 +8,7 @@ public class Day extends java.util.ArrayList<Exercise> implements Serializable {
     public Day(){
     }
     public String toString(int number){
-        return "Day"+ number;
+        int num=number+1;
+        return "Day"+ num;
     }
 }

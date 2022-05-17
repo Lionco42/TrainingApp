@@ -9,7 +9,7 @@ public class Muscle implements java.io.Serializable {
     }
 
     public void editCount(int num){
-        this.count=+num;
+        this.count=this.count+num;
     }
 
 
