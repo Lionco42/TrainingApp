@@ -100,11 +100,4 @@ public class Week extends java.util.ArrayList<Day> implements Serializable {
         ArrayList<Day> days = gson.fromJson(str, listType);
         addAll(days);
     }
-    public void removeDay(Day day){
-        this.remove(day);
-        saveDataFile();
-    }
-    public int getCount(){
-        return this.count;
-    }
 }

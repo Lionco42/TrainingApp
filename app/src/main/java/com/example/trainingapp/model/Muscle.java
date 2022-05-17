@@ -21,7 +21,4 @@ public class Muscle implements java.io.Serializable {
                 '}';
     }
     public String getName(){return this.name;}
-    public int getCount(){
-        return this.count;
-    }
 }

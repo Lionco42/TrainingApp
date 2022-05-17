@@ -11,4 +11,7 @@ public class Day extends java.util.ArrayList<Exercise> implements Serializable {
         int num= number+1;
         return "Day"+ num;
     }
+    public void deleteEx(int num){
+        this.remove(num);
+    }
 }

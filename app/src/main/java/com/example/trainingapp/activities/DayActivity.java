@@ -3,6 +3,7 @@ package com.example.trainingapp.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -10,11 +11,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.trainingapp.model.Day;
 import com.example.trainingapp.model.Exercise;
 import com.example.trainingapp.model.ExerciseList;
 import com.example.trainingapp.model.ExerciseType;
@@ -25,12 +29,14 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
-public class  DayActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
+public class  DayActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener, CompoundButton.OnCheckedChangeListener {
     Button btnReturn, btnAddToDay, btnConfirmAdd;
     EditText etAddName, etAddReps, etAddSets;
     TextView tv;
     Week week2;
-    ArrayList<Exercise> dayx;
+    Day dayx;
+    Switch sw;
+    Boolean delFlag=false;
     ExerciseList exs;
     ArrayAdapter<Exercise> dayAdapter;
     ListView day;
@@ -39,7 +45,6 @@ public class  DayActivity extends AppCompatActivity implements View.OnClickListe
     Spinner spinner;
     ExerciseType selectedEx;
     ArrayAdapter<ExerciseType> spinnerAdapter;
-    SharedPreferences sp;
     MuscleList muscleList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +54,17 @@ public class  DayActivity extends AppCompatActivity implements View.OnClickListe
         btnReturn.setOnClickListener(this);
         btnAddToDay=findViewById(R.id.btnAddToDay);
         btnAddToDay.setOnClickListener(this);
-        tv=findViewById(R.id.tvDay);
+        tv=findViewById(R.id.tvDayName);
         day=findViewById(R.id.day);
+        sw=findViewById(R.id.swDelete);
+        sw.setOnCheckedChangeListener(this);
 
         week2=Week.getInstance(this);
         exs= ExerciseList.getInstance(this);
         muscleList =muscleList.getInstance(this);
         dayNumber = getIntent().getExtras().getInt("dayNumber");
         dayx=week2.get(dayNumber);
-        tv.setText(dayx.toString());
+        tv.setText("Day " + Integer.toString(dayNumber+1));
         dayAdapter = new ArrayAdapter<Exercise>(this, android.R.layout.activity_list_item, android.R.id.text1, dayx) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -65,7 +72,7 @@ public class  DayActivity extends AppCompatActivity implements View.OnClickListe
                 Exercise ex1 = (Exercise) day.getAdapter().getItem(position);
                 TextView text = view.findViewById(android.R.id.text1);
                 if(!dayx.isEmpty())
-                    text.setText(ex1.getName()+" ("+ex1.getType()+")"+", Reps: "+ex1.getReps()+", Sets: "+ex1.getSets());
+                    text.setText(ex1.getName()+" ("+ex1.getType().getMovement()+")"+", Reps: "+ex1.getReps()+", Sets: "+ex1.getSets());
                 return view;
             }
         };
@@ -112,6 +119,13 @@ public class  DayActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        if(delFlag){
+            muscleList.addSets(dayx.get(i).getType().getMuscles(),(-1)*(dayx.get(i).getSets()));
+            dayx.remove(i);
+            dayAdapter.notifyDataSetChanged();
+            week2.saveDataFile();
+            muscleList.saveDataFile();
+        }
         selectedEx = exs.get(i);
     }
 
@@ -122,6 +136,15 @@ public class  DayActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        if(b)
+            delFlag=true;
+        else
+            delFlag=false;
 
     }
 }

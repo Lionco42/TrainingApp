@@ -28,21 +28,21 @@
         <Button
             android:id="@+id/btnReturn"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Return to Main Menu" />
 
         <Button
             android:id="@+id/btnInfo"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Movement Info" />
 
         <Button
             android:id="@+id/btnCreate"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Create Exercise" />
     </LinearLayout>

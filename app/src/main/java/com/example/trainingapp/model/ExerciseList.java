@@ -33,10 +33,6 @@ public class ExerciseList extends java.util.ArrayList<ExerciseType> implements S
     }
 
     private void prepareDataFile() {
-        File data = new File(context.getFilesDir(), DATA_FILE_NAME);
-        if (data.exists()) {
-            loadDataFile();
-        } else {
             String str = readDataFromFile(context.getResources().openRawResource(R.raw.exercisettypelist));
             Gson gson = new Gson();
             Type listType = new TypeToken<ArrayList<ExerciseType>>(){}.getType();
@@ -44,7 +40,6 @@ public class ExerciseList extends java.util.ArrayList<ExerciseType> implements S
             addAll(exs);
             saveDataFile();
         }
-    }
 
     private String readDataFromFile(InputStream in) {
         String str = "";
@@ -73,6 +68,13 @@ public class ExerciseList extends java.util.ArrayList<ExerciseType> implements S
         }
     }
 
+    public void createEx(String type, String name) {
+        ExerciseType ex = new ExerciseType(type, name);
+        this.add(ex);
+        saveDataFile();
+    }
+}
+/*
     private void loadDataFile() {
         Gson gson = new Gson();
         InputStream in = null;
@@ -91,17 +93,4 @@ public class ExerciseList extends java.util.ArrayList<ExerciseType> implements S
         ArrayList<ExerciseType> exs = gson.fromJson(str, listType);
         addAll(exs);
     }
-    public void createEx(String type, String name) {
-        ExerciseType ex = new ExerciseType(type, name);
-        this.add(ex);
-        saveDataFile();
-    }
-    public ExerciseType getEx(String name){
-        for(int i = 0; i<= this.toArray().length; i++){
-            if(this.get(i).toString().equals(name)){
-                return this.get(i);
-            }
-        }
-        return new ExerciseType("Horizontal Pull","CableRow");
-    }
-}
+    */

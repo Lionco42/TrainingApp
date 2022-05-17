@@ -20,5 +20,5 @@ public class Exercise {
     }public String getReps(){
         return this.reps;
     }
-    public String getType(){return this.exerciseType.getMovement();}
+    public ExerciseType getType(){return this.exerciseType;}
 }
