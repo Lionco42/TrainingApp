@@ -33,6 +33,7 @@ public class Week extends java.util.ArrayList<Day> implements Serializable {
     public void setContext(Context context){
         this.context = context;
     }
+
     public void addDay(Day day){
         this.add(day);
         this.count++;

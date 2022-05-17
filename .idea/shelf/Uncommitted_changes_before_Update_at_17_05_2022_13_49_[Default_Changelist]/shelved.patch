@@ -1,0 +1,171 @@
+Index: app/src/main/java/com/example/trainingapp/model/Day.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.trainingapp.model;\r\n\r\nimport java.io.Serializable;\r\nimport java.util.ArrayList;\r\n\r\npublic class Day extends java.util.ArrayList<Exercise> implements Serializable {\r\n    //int number;\r\n    //ArrayList<Exercise> exsList;\r\n    public Day(){\r\n    }\r\n    /*\r\n    public ArrayList<Exercise> getExsList(){\r\n        return this.exsList;\r\n    }\r\n    public void addExercise(Exercise exercise){\r\n        this.exsList.add(exercise);\r\n    }\r\n    public void removeExercise(Exercise exercise){\r\n        this.exsList.remove(exercise);\r\n    }\r\n     */\r\n    public String toString(int number){\r\n        return \"Day\"+ number;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/trainingapp/model/Day.java b/app/src/main/java/com/example/trainingapp/model/Day.java
+--- a/app/src/main/java/com/example/trainingapp/model/Day.java	(revision f7251d099047d217501358ef22bf24a89192dfed)
++++ b/app/src/main/java/com/example/trainingapp/model/Day.java	(date 1652784563998)
+@@ -4,22 +4,11 @@
+ import java.util.ArrayList;
+ 
+ public class Day extends java.util.ArrayList<Exercise> implements Serializable {
+-    //int number;
+-    //ArrayList<Exercise> exsList;
++
+     public Day(){
+     }
+-    /*
+-    public ArrayList<Exercise> getExsList(){
+-        return this.exsList;
+-    }
+-    public void addExercise(Exercise exercise){
+-        this.exsList.add(exercise);
+-    }
+-    public void removeExercise(Exercise exercise){
+-        this.exsList.remove(exercise);
+-    }
+-     */
+     public String toString(int number){
+-        return "Day"+ number;
++        int num= number+1;
++        return "Day"+ num;
+     }
+ }
+Index: app/src/main/java/com/example/trainingapp/model/Week.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.trainingapp.model;\r\n\r\nimport android.content.Context;\r\nimport android.content.ContextWrapper;\r\n\r\nimport com.example.trainingapp.R;\r\nimport com.google.gson.Gson;\r\nimport com.google.gson.reflect.TypeToken;\r\n\r\nimport java.io.File;\r\nimport java.io.FileOutputStream;\r\nimport java.io.IOException;\r\nimport java.io.InputStream;\r\nimport java.io.Serializable;\r\nimport java.lang.reflect.Type;\r\nimport java.nio.charset.StandardCharsets;\r\nimport java.util.ArrayList;\r\n\r\npublic class Week extends java.util.ArrayList<Day> implements Serializable {\r\n    private static final String DATA_FILE_NAME = \"week\";\r\n    public static Week instance;\r\n    private Context context;\r\n    public static int count=0;\r\n    public static Week getInstance(Context context){\r\n        if (instance == null) instance = new Week(context);\r\n        return instance;\r\n    }\r\n    private Week(Context context){\r\n        super();\r\n        this.context = context;\r\n        //test();\r\n        prepareDataFile();\r\n    }\r\n    public void setContext(Context context){\r\n        this.context = context;\r\n    }\r\n    public void addDay(Day day){\r\n        this.add(day);\r\n        this.count++;\r\n        saveDataFile();\r\n    }\r\n\r\n    /*private void test(){\r\n        ExerciseType exerciseType1 = new ExerciseType(\"Vertical Pull\", \"Pullup\");\r\n        Exercise ex1 = new Exercise(3, exerciseType1, \"10\");\r\n        Day day1 = new Day();\r\n        day1.add(ex1);\r\n        ExerciseType exerciseType2 = new ExerciseType(\"Vertical Push\", \"OHP\");\r\n        Exercise ex2 = new Exercise(3, exerciseType2, \"10\");\r\n        Day day2 = new Day();\r\n        day2.add(ex2);\r\n        add(day1);\r\n        add(day2);\r\n        saveDataFile();\r\n    }*/\r\n\r\n    public void prepareDataFile() {\r\n        File data = new File(context.getFilesDir(), DATA_FILE_NAME);\r\n        if (data.exists()) {\r\n            loadDataFile();\r\n        } else {\r\n            String str = readDataFromFile(context.getResources().openRawResource(R.raw.week));\r\n            Gson gson = new Gson();\r\n            Type listType = new TypeToken<ArrayList<Day>>(){}.getType();\r\n            ArrayList<Day> daysArrayList = gson.fromJson(str, listType);\r\n            addAll(daysArrayList);\r\n            saveDataFile();\r\n        }\r\n    }\r\n\r\n    private String readDataFromFile(InputStream in) {\r\n        String str = \"\";\r\n        try {\r\n            byte[] buffer=new byte[in.available()];\r\n            in.read(buffer);\r\n            str=new String(buffer, StandardCharsets.UTF_8);\r\n            in.close();\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n        return str;\r\n    }\r\n\r\n    public void saveDataFile() {\r\n        Gson gson = new Gson();\r\n        String json = gson.toJson(this);\r\n        FileOutputStream out = null;\r\n\r\n        try {\r\n            out = context.openFileOutput(DATA_FILE_NAME, Context.MODE_PRIVATE);\r\n            out.write(json.getBytes(), 0, json.getBytes().length);\r\n            out.close();\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    private void loadDataFile() {\r\n        Gson gson = new Gson();\r\n        InputStream in = null;\r\n        String str = \"\";\r\n\r\n        try {\r\n            in = context.openFileInput(DATA_FILE_NAME);\r\n            byte[] buffer=new byte[in.available()];\r\n            in.read(buffer);\r\n            str=new String(buffer, StandardCharsets.UTF_8);\r\n            in.close();\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n        Type listType = new TypeToken<ArrayList<Day>>(){}.getType();\r\n        ArrayList<Day> days = gson.fromJson(str, listType);\r\n        addAll(days);\r\n    }\r\n    public void removeDay(Day day){\r\n        this.remove(day);\r\n        saveDataFile();\r\n    }\r\n    public int getCount(){\r\n        return this.count;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/trainingapp/model/Week.java b/app/src/main/java/com/example/trainingapp/model/Week.java
+--- a/app/src/main/java/com/example/trainingapp/model/Week.java	(revision f7251d099047d217501358ef22bf24a89192dfed)
++++ b/app/src/main/java/com/example/trainingapp/model/Week.java	(date 1652784563976)
+@@ -28,31 +28,18 @@
+     private Week(Context context){
+         super();
+         this.context = context;
+-        //test();
+         prepareDataFile();
+     }
+     public void setContext(Context context){
+         this.context = context;
+     }
++
+     public void addDay(Day day){
+         this.add(day);
+         this.count++;
+         saveDataFile();
+     }
+ 
+-    /*private void test(){
+-        ExerciseType exerciseType1 = new ExerciseType("Vertical Pull", "Pullup");
+-        Exercise ex1 = new Exercise(3, exerciseType1, "10");
+-        Day day1 = new Day();
+-        day1.add(ex1);
+-        ExerciseType exerciseType2 = new ExerciseType("Vertical Push", "OHP");
+-        Exercise ex2 = new Exercise(3, exerciseType2, "10");
+-        Day day2 = new Day();
+-        day2.add(ex2);
+-        add(day1);
+-        add(day2);
+-        saveDataFile();
+-    }*/
+ 
+     public void prepareDataFile() {
+         File data = new File(context.getFilesDir(), DATA_FILE_NAME);
+Index: app/src/main/java/com/example/trainingapp/activities/DayActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.trainingapp.activities;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.app.Dialog;\r\nimport android.content.SharedPreferences;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.AdapterView;\r\nimport android.widget.ArrayAdapter;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.ListView;\r\nimport android.widget.Spinner;\r\nimport android.widget.TextView;\r\n\r\nimport com.example.trainingapp.model.Exercise;\r\nimport com.example.trainingapp.model.ExerciseList;\r\nimport com.example.trainingapp.model.ExerciseType;\r\nimport com.example.trainingapp.R;\r\nimport com.example.trainingapp.model.MuscleList;\r\nimport com.example.trainingapp.model.Week;\r\nimport com.google.gson.Gson;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class  DayActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {\r\n    Button btnReturn, btnAddToDay, btnConfirmAdd;\r\n    EditText etAddName, etAddReps, etAddSets;\r\n    TextView tv;\r\n    Week week2;\r\n    ArrayList<Exercise> dayx;\r\n    ExerciseList exs;\r\n    ArrayAdapter<Exercise> dayAdapter;\r\n    ListView day;\r\n    Dialog d;\r\n    int dayNumber;\r\n    Spinner spinner;\r\n    ExerciseType selectedEx;\r\n    ArrayAdapter<ExerciseType> spinnerAdapter;\r\n    SharedPreferences sp;\r\n    MuscleList muscleList;\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_day);\r\n        btnReturn=findViewById(R.id.btnReturnFromDayToMain);\r\n        btnReturn.setOnClickListener(this);\r\n        btnAddToDay=findViewById(R.id.btnAddToDay);\r\n        btnAddToDay.setOnClickListener(this);\r\n        day=findViewById(R.id.day);\r\n\r\n        week2=Week.getInstance(this);\r\n        exs= ExerciseList.getInstance(this);\r\n        muscleList =muscleList.getInstance(this);\r\n        dayNumber = getIntent().getExtras().getInt(\"dayNumber\");\r\n        dayx=week2.get(dayNumber);\r\n        dayAdapter = new ArrayAdapter<Exercise>(this, android.R.layout.activity_list_item, android.R.id.text1, dayx) {\r\n            @Override\r\n            public View getView(int position, View convertView, ViewGroup parent) {\r\n                View view = super.getView(position, convertView, parent);\r\n                Exercise ex1 = (Exercise) day.getAdapter().getItem(position);\r\n                TextView text = view.findViewById(android.R.id.text1);\r\n                if(!dayx.isEmpty())\r\n                    text.setText(ex1.getName()+\" (\"+ex1.getType()+\")\"+\", Reps: \"+ex1.getReps()+\", Sets: \"+ex1.getSets());\r\n                return view;\r\n            }\r\n        };\r\n        day.setAdapter(dayAdapter);\r\n        day.setOnItemClickListener(this);\r\n\r\n        spinnerAdapter = new ArrayAdapter<ExerciseType>(this, android.R.layout.simple_spinner_dropdown_item, exs);\r\n        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);\r\n\r\n\r\n    }\r\n\r\n    @Override\r\n    public void onClick(View view){\r\n        if(view==btnReturn){\r\n            finish();\r\n        }\r\n        if(view==btnAddToDay){\r\n            d=new Dialog(this);\r\n            d.setContentView(R.layout.exerciseadd_dialog);\r\n            d.setTitle(\"Create Exercise\");\r\n            d.setCancelable(true);\r\n            etAddName=(EditText)d.findViewById(R.id.etExName);\r\n            etAddReps=(EditText)d.findViewById(R.id.etAddReps);\r\n            etAddSets=(EditText)d.findViewById(R.id.etAddSets);\r\n            btnConfirmAdd=(Button)d.findViewById(R.id.btnConfirmAdd);\r\n            btnConfirmAdd.setOnClickListener(this);\r\n\r\n            spinner = (Spinner)d.findViewById(R.id.spin);\r\n            spinner.setAdapter(spinnerAdapter);\r\n            spinner.setOnItemSelectedListener(this);\r\n\r\n            d.show();\r\n        }\r\n        if(view==btnConfirmAdd){\r\n            Exercise ex = new Exercise(Integer.valueOf(etAddSets.getText().toString()),selectedEx, etAddReps.getText().toString());\r\n            dayx.add(ex);\r\n            week2.saveDataFile();\r\n            muscleList.addSets(selectedEx.getMuscles(),Integer.valueOf(etAddSets.getText().toString()));\r\n            dayAdapter.notifyDataSetChanged();\r\n            d.dismiss();\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {\r\n        selectedEx = exs.get(i);\r\n    }\r\n\r\n    @Override\r\n    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {\r\n        selectedEx = exs.get(i);\r\n    }\r\n\r\n    @Override\r\n    public void onNothingSelected(AdapterView<?> adapterView) {\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/trainingapp/activities/DayActivity.java b/app/src/main/java/com/example/trainingapp/activities/DayActivity.java
+--- a/app/src/main/java/com/example/trainingapp/activities/DayActivity.java	(revision f7251d099047d217501358ef22bf24a89192dfed)
++++ b/app/src/main/java/com/example/trainingapp/activities/DayActivity.java	(date 1651667267385)
+@@ -49,6 +49,7 @@
+         btnReturn.setOnClickListener(this);
+         btnAddToDay=findViewById(R.id.btnAddToDay);
+         btnAddToDay.setOnClickListener(this);
++        tv=findViewById(R.id.tvDay);
+         day=findViewById(R.id.day);
+ 
+         week2=Week.getInstance(this);
+@@ -56,6 +57,7 @@
+         muscleList =muscleList.getInstance(this);
+         dayNumber = getIntent().getExtras().getInt("dayNumber");
+         dayx=week2.get(dayNumber);
++        tv.setText(dayx.toString());
+         dayAdapter = new ArrayAdapter<Exercise>(this, android.R.layout.activity_list_item, android.R.id.text1, dayx) {
+             @Override
+             public View getView(int position, View convertView, ViewGroup parent) {
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"DesignSurface\">\r\n    <option name=\"filePathToZoomLevelMap\">\r\n      <map>\r\n        <entry key=\"..\\:/Users/user/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_day.xml\" value=\"0.33\" />\r\n        <entry key=\"..\\:/Users/user/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_exercise_info.xml\" value=\"0.20885416666666667\" />\r\n        <entry key=\"..\\:/Users/user/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_exercise_list.xml\" value=\"0.22\" />\r\n        <entry key=\"..\\:/Users/user/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_main.xml\" value=\"0.11296296296296296\" />\r\n        <entry key=\"..\\:/Users/user/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_program_stats.xml\" value=\"0.20885416666666667\" />\r\n        <entry key=\"..\\:/Users/user/AndroidStudioProjects/TrainingApp/app/src/main/res/menu/menu_main.xml\" value=\"0.20885416666666667\" />\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" default=\"true\" project-jdk-name=\"11\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision f7251d099047d217501358ef22bf24a89192dfed)
++++ b/.idea/misc.xml	(date 1651666546151)
+@@ -3,12 +3,8 @@
+   <component name="DesignSurface">
+     <option name="filePathToZoomLevelMap">
+       <map>
+-        <entry key="..\:/Users/user/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_day.xml" value="0.33" />
+-        <entry key="..\:/Users/user/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_exercise_info.xml" value="0.20885416666666667" />
+-        <entry key="..\:/Users/user/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_exercise_list.xml" value="0.22" />
+-        <entry key="..\:/Users/user/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_main.xml" value="0.11296296296296296" />
+-        <entry key="..\:/Users/user/AndroidStudioProjects/TrainingApp/app/src/main/res/layout/activity_program_stats.xml" value="0.20885416666666667" />
+-        <entry key="..\:/Users/user/AndroidStudioProjects/TrainingApp/app/src/main/res/menu/menu_main.xml" value="0.20885416666666667" />
++        <entry key="..\:/Desktop/TrainingApp/app/src/main/res/layout/activity_day.xml" value="0.35104166666666664" />
++        <entry key="..\:/Desktop/TrainingApp/app/src/main/res/layout/activity_main.xml" value="0.35104166666666664" />
+       </map>
+     </option>
+   </component>
+Index: app/src/main/res/layout/activity_day.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    tools:context=\".activities.DayActivity\">\r\n\r\n    <ListView\r\n        android:id=\"@+id/day\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"187dp\">\r\n\r\n    </ListView>\r\n\r\n    <Button\r\n        android:id=\"@+id/btnAddToDay\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Add Exercise\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/btnReturnFromDayToMain\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Return to Main Menu\" />\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_day.xml b/app/src/main/res/layout/activity_day.xml
+--- a/app/src/main/res/layout/activity_day.xml	(revision f7251d099047d217501358ef22bf24a89192dfed)
++++ b/app/src/main/res/layout/activity_day.xml	(date 1651666943019)
+@@ -7,6 +7,12 @@
+     android:orientation="vertical"
+     tools:context=".activities.DayActivity">
+ 
++    <TextView
++        android:id="@+id/tvDay"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:text="TextView" />
++
+     <ListView
+         android:id="@+id/day"
+         android:layout_width="match_parent"
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"testRunner\" value=\"GRADLE\" />\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n          </set>\r\n        </option>\r\n        <option name=\"resolveModulePerSourceSet\" value=\"false\" />\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision f7251d099047d217501358ef22bf24a89192dfed)
++++ b/.idea/gradle.xml	(date 1652784455024)
+@@ -13,7 +13,6 @@
+             <option value="$PROJECT_DIR$/app" />
+           </set>
+         </option>
+-        <option name="resolveModulePerSourceSet" value="false" />
+       </GradleProjectSettings>
+     </option>
+   </component>

@@ -15,7 +15,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.trainingapp.model.Day;
 import com.example.trainingapp.model.Exercise;
 import com.example.trainingapp.model.ExerciseList;
 import com.example.trainingapp.model.ExerciseType;
@@ -31,7 +30,7 @@ public class  DayActivity extends AppCompatActivity implements View.OnClickListe
     EditText etAddName, etAddReps, etAddSets;
     TextView tv;
     Week week2;
-    Day dayx;
+    ArrayList<Exercise> dayx;
     ExerciseList exs;
     ArrayAdapter<Exercise> dayAdapter;
     ListView day;
@@ -40,6 +39,7 @@ public class  DayActivity extends AppCompatActivity implements View.OnClickListe
     Spinner spinner;
     ExerciseType selectedEx;
     ArrayAdapter<ExerciseType> spinnerAdapter;
+    SharedPreferences sp;
     MuscleList muscleList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class  DayActivity extends AppCompatActivity implements View.OnClickListe
         btnReturn.setOnClickListener(this);
         btnAddToDay=findViewById(R.id.btnAddToDay);
         btnAddToDay.setOnClickListener(this);
-        tv=findViewById(R.id.tvDayName);
+        tv=findViewById(R.id.tvDay);
         day=findViewById(R.id.day);
 
         week2=Week.getInstance(this);
@@ -57,6 +57,7 @@ public class  DayActivity extends AppCompatActivity implements View.OnClickListe
         muscleList =muscleList.getInstance(this);
         dayNumber = getIntent().getExtras().getInt("dayNumber");
         dayx=week2.get(dayNumber);
+        tv.setText(dayx.toString());
         dayAdapter = new ArrayAdapter<Exercise>(this, android.R.layout.activity_list_item, android.R.id.text1, dayx) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -102,8 +103,8 @@ public class  DayActivity extends AppCompatActivity implements View.OnClickListe
         if(view==btnConfirmAdd){
             Exercise ex = new Exercise(Integer.valueOf(etAddSets.getText().toString()),selectedEx, etAddReps.getText().toString());
             dayx.add(ex);
-            muscleList.addSets(selectedEx.getMuscles(),Integer.valueOf(etAddSets.getText().toString()));
             week2.saveDataFile();
+            muscleList.addSets(selectedEx.getMuscles(),Integer.valueOf(etAddSets.getText().toString()));
             dayAdapter.notifyDataSetChanged();
             d.dismiss();
         }
