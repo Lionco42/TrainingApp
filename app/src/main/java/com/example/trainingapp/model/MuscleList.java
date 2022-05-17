@@ -30,11 +30,7 @@ public class MuscleList extends java.util.ArrayList<Muscle> implements Serializa
         return instance;
     }
 
-    private void test(){
-        add(new Muscle("yoav"));
-        add(new Muscle("yoav1"));
-        saveDataFile();
-    }
+
     public void prepareDataFile() {
         File data = new File(context.getFilesDir(), DATA_FILE_NAME);
         if (data.exists()) {

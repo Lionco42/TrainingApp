@@ -28,7 +28,6 @@ public class Week extends java.util.ArrayList<Day> implements Serializable {
     private Week(Context context){
         super();
         this.context = context;
-        //test();
         prepareDataFile();
     }
     public void setContext(Context context){
@@ -40,19 +39,6 @@ public class Week extends java.util.ArrayList<Day> implements Serializable {
         saveDataFile();
     }
 
-    /*private void test(){
-        ExerciseType exerciseType1 = new ExerciseType("Vertical Pull", "Pullup");
-        Exercise ex1 = new Exercise(3, exerciseType1, "10");
-        Day day1 = new Day();
-        day1.add(ex1);
-        ExerciseType exerciseType2 = new ExerciseType("Vertical Push", "OHP");
-        Exercise ex2 = new Exercise(3, exerciseType2, "10");
-        Day day2 = new Day();
-        day2.add(ex2);
-        add(day1);
-        add(day2);
-        saveDataFile();
-    }*/
 
     public void prepareDataFile() {
         File data = new File(context.getFilesDir(), DATA_FILE_NAME);

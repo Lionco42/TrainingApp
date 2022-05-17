@@ -30,7 +30,6 @@ public class ExerciseListActivity extends AppCompatActivity implements View.OnCl
     Dialog d;
     EditText etExName;
     ExerciseList lst = ExerciseList.getInstance(this);
-    SharedPreferences sp;
     Spinner spinner;
     ArrayAdapter<String> spinnerAdapter;
     ArrayAdapter<ExerciseType> exerciseTypeArrayAdapter;
@@ -90,12 +89,6 @@ public class ExerciseListActivity extends AppCompatActivity implements View.OnCl
         }
         if(view==btnConfirm){
             lst.createEx(selectedMovement, etExName.getText().toString());
-            sp=getSharedPreferences("details1",0);
-            SharedPreferences.Editor editor=sp.edit();
-            Gson gson=new Gson();
-            String json = gson.toJson(lst);
-            editor.putString("exerciseTypeList", json);
-            editor.commit();
             exerciseTypeArrayAdapter.notifyDataSetChanged();
             d.dismiss();
         }

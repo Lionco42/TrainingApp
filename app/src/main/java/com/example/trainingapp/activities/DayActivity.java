@@ -39,7 +39,6 @@ public class  DayActivity extends AppCompatActivity implements View.OnClickListe
     Spinner spinner;
     ExerciseType selectedEx;
     ArrayAdapter<ExerciseType> spinnerAdapter;
-    SharedPreferences sp;
     MuscleList muscleList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

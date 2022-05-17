@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.telephony.PhoneStateListener;
+import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 
 import java.util.prefs.NodeChangeEvent;
@@ -24,20 +25,9 @@ public class PhoneCallReciever extends BroadcastReceiver {
                 super.onCallStateChanged(state, incomingNumber);
                 if(state==TelephonyManager.CALL_STATE_RINGING){
 
-                    Intent intent= new Intent();
-                    intent.setAction(Intent.ACTION_CALL);
-                    Uri uri = Uri.parse("tel:054-5555555");
-                    intent.setData(uri);
-                    //startActivity(intent);
+                    SmsManager smsManager=SmsManager.getDefault();
+                    smsManager.sendTextMessage(incomingNumber,null,"Hey, I am busy at the moment writing my training program with the 'Training Planner' app. I will make sure to call you later. In the meantime, maybe check out the app on Play Store: https://play.google.com/store/apps/details?id=com.example.trainingapp.",null,null);
 
-                    Notification.Builder builder=new Notification.Builder(context);
-                    builder.setContentText(incomingNumber);
-                    builder.setSmallIcon(android.R.drawable.star_on);
-                    Notification notification = builder.build();
-                    NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-                    notification.flags |= Notification.FLAG_AUTO_CANCEL;
-                    notification.defaults=Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND;
-                    notificationManager.notify(0,notification);
                 }
             }
         },PhoneStateListener.LISTEN_CALL_STATE);
