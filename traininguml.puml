@@ -3,19 +3,16 @@ class com.example.trainingapp.model.Exercise {
 ~ ExerciseType exerciseType
 ~ String reps
 ~ int sets
-+ <<Create>> Exercise(int,ExerciseType,String)
 + String getName()
 + int getSets()
 + String getReps()
-+ String getType()
++ ExerciseType getType()
 }
 class com.example.trainingapp.model.MuscleList {
 - {static} String DATA_FILE_NAME
 - Context context
 - {static} MuscleList instance
-+ <<Create>> MuscleList(Context)
 + {static} MuscleList getInstance(Context)
-- void test()
 + void prepareDataFile()
 - String readDataFromFile(InputStream)
 + void saveDataFile()
@@ -26,36 +23,31 @@ class com.example.trainingapp.model.ExerciseList {
 - {static} String DATA_FILE_NAME
 - Context context
 + {static} ExerciseList instance
-+ <<Create>> ExerciseList(Context)
 + {static} ExerciseList getInstance(Context)
 - void prepareDataFile()
 - String readDataFromFile(InputStream)
 + void saveDataFile()
-- void loadDataFile()
 + void createEx(String,String)
-+ ExerciseType getEx(String)
 }
 class com.example.trainingapp.model.ExerciseType {
 - String name
 - String movement
 - String[] muscles
 + {static} String[] movementTypes
-+ <<Create>> ExerciseType(String,String)
 + {static} String[] getMovementTypes()
 + String getMovement()
 + String[] getMuscles()
 + String toString()
 }
 class com.example.trainingapp.model.Day {
-+ <<Create>> Day()
 + String toString(int)
++ void deleteEx(int)
 }
 class com.example.trainingapp.model.Week {
 - {static} String DATA_FILE_NAME
 + {static} Week instance
 - Context context
 + {static} int count
-- <<Create>> Week(Context)
 + {static} Week getInstance(Context)
 + void setContext(Context)
 + void addDay(Day)
@@ -67,10 +59,7 @@ class com.example.trainingapp.model.Week {
 class com.example.trainingapp.model.Muscle {
 - String name
 - int count
-+ <<Create>> Muscle()
-+ <<Create>> Muscle(String)
 + void editCount(int)
-+ int getCount()
 + String toString()
 + String getName()
 }
