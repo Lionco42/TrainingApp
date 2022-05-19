@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         week1=Week.getInstance(this);
         exs= ExerciseList.getInstance(this);
         phoneCallReciever = new PhoneCallReciever();
-        registerReceiver(phoneCallReciever, new IntentFilter("android.intent.action.PHONE_STATE"));
+        registerReceiver(phoneCallReciever, new IntentFilter(Intent.ACTION_CALL));
 
         if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED)
             requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_CALL_LOG, Manifest.permission.SEND_SMS}, PHONE_STATE_PERMISSION_REQUEST_CODE);

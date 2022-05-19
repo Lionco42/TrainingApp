@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.telephony.PhoneStateListener;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
+import android.widget.Toast;
 
 import java.util.prefs.NodeChangeEvent;
 
@@ -19,17 +20,11 @@ public class PhoneCallReciever extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, Intent intent) {
         TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        manager.listen(new PhoneStateListener(){
-            @Override
-            public void onCallStateChanged(int state, String incomingNumber){
-                super.onCallStateChanged(state, incomingNumber);
-                if(state==TelephonyManager.CALL_STATE_RINGING){
-
+                if((intent.getStringExtra(TelephonyManager.EXTRA_STATE).equals(TelephonyManager.EXTRA_STATE_RINGING) && intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER) != null)){
+                    String num=intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
                     SmsManager smsManager=SmsManager.getDefault();
-                    smsManager.sendTextMessage(incomingNumber,null,"Hey, I am busy at the moment writing my training program with the 'Training Planner' app. I will make sure to call you later. In the meantime, maybe check out the app on Play Store: https://play.google.com/store/apps/details?id=com.example.trainingapp.",null,null);
-
+                    smsManager.sendTextMessage(num,null,"Hey, I am busy at the moment",null,null);
                 }
             }
-        },PhoneStateListener.LISTEN_CALL_STATE);
-    }
-}
+        }
+
